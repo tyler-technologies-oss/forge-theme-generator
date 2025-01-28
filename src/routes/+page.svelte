@@ -32,6 +32,8 @@
 					<div class="dialog">
 						<forge-toolbar>
 							<h1 slot="start" class="forge-typography--heading3">CSS Custom Properties</h1>
+							<!-- svelte-ignore a11y_click_events_have_key_events -->
+							<!-- svelte-ignore a11y_no_static_element_interactions -->
 							<forge-icon-button
 								slot="end"
 								onclick={() => {
