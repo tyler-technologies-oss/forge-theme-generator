@@ -6,7 +6,6 @@
 	import { json } from '@sveltejs/kit';
 	import ThemeDemo from '$lib/components/ThemeDemo.svelte';
 	import CopyToClipboardButton from '$lib/components/CopyToClipboardButton.svelte';
-	import BorderRadiusToggle from '$lib/components/BorderRadiusToggle.svelte';
 	import ShapeSlider from '$lib/components/ShapeSlider.svelte';
 	let dialog;
 </script>
@@ -19,7 +18,6 @@
 				<ColorPicker colorType="secondary" />
 				<ColorPicker colorType="tertiary" />
 				<ShapeSlider />
-				<!-- <BorderRadiusToggle /> -->
 				<forge-button variant="raised" id="open-css-dialog">
 					<forge-icon name="code" external></forge-icon>
 					Get CSS
