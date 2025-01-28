@@ -1,5 +1,6 @@
 <script lang="ts">
 	let { children } = $props();
+	import '../app.css';
 </script>
 
 <forge-app-bar title-text="Tyler Forge Theming" theme="white">
@@ -8,9 +9,4 @@
 {@render children()}
 
 <style>
-	:global(body) {
-		margin: 0;
-		padding: 0;
-		height: 100dvh;
-	}
 </style>
