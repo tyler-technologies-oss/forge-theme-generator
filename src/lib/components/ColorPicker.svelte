@@ -4,6 +4,7 @@
 	let { colorType } = $props();
 	let root = $state({});
 	let firstLoad = false;
+	let luminance;
 
 	const setOnColorBasedOnLuminance = (luminance) => {
 		if (luminance <= 0.25) {
@@ -33,7 +34,11 @@
 	});
 
 	const setColors = (newColor) => {
-		const luminance = chroma(newColor).luminance();
+		let isValidColor = chroma.valid(newColor);
+		if (!isValidColor) {
+			return;
+		}
+		luminance = chroma(newColor).luminance();
 
 		switch (colorType) {
 			case 'brand':
@@ -123,7 +128,7 @@
 	};
 
 	const onColorChange = (color) => {
-		setColors(`#${color}`);
+		setColors(`${color}`);
 	};
 </script>
 
@@ -131,11 +136,32 @@
 	<forge-text-field label-position="block-start">
 		<label for={colorType}>{colorType} Color</label>
 		{#if colorType === 'primary'}
-			<input type="text" id={colorType} bind:value={theme.primaryColor} />
+			<input
+				type="text"
+				id={colorType}
+				bind:value={theme.primaryColor}
+				oninput={(e) => {
+					onColorChange(e.target.value);
+				}}
+			/>
 		{:else if colorType === 'secondary'}
-			<input type="text" id={colorType} bind:value={theme.secondaryColor} />
+			<input
+				type="text"
+				id={colorType}
+				bind:value={theme.secondaryColor}
+				oninput={(e) => {
+					onColorChange(e.target.value);
+				}}
+			/>
 		{:else}
-			<input type="text" id={colorType} bind:value={theme.tertiaryColor} />
+			<input
+				type="text"
+				id={colorType}
+				bind:value={theme.tertiaryColor}
+				oninput={(e) => {
+					onColorChange(e.target.value);
+				}}
+			/>
 		{/if}
 
 		<forge-icon-button
@@ -153,7 +179,7 @@
 	>
 		<forge-color-picker
 			onforge-color-picker-change={(e) => {
-				onColorChange(e.detail.hex);
+				onColorChange(`#${e.detail.hex}`);
 			}}
 		></forge-color-picker>
 	</forge-popover>
