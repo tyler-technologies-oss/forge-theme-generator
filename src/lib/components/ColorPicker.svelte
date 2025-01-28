@@ -17,18 +17,7 @@
 	$effect(() => {
 		root = document.documentElement;
 		if (!firstLoad) {
-			if (colorType === 'brand') {
-				setColors(theme.brandColor);
-			}
-			if (colorType === 'primary') {
-				setColors(theme.primaryColor);
-			}
-			if (colorType === 'secondary') {
-				setColors(theme.secondaryColor);
-			}
-			if (colorType === 'tertiary') {
-				setColors(theme.tertiaryColor);
-			}
+			setColors(theme[`${colorType}Color`]);
 			firstLoad = true;
 		}
 	});
@@ -39,91 +28,34 @@
 			return;
 		}
 		luminance = chroma(newColor).luminance();
+		theme[`${colorType}Color`] = newColor;
 
-		switch (colorType) {
-			case 'brand':
-				theme.brandColor = newColor;
-				root.style.setProperty(`--forge-theme-brand`, newColor);
+		// BRAND doesn't use any additional container colors
+		if (colorType !== 'brand') {
+			theme[`${colorType}ContainerColors`] = chroma
+				.scale([theme[`${colorType}Color`], theme[`${colorType}ColorLightest`]])
+				.mode('lab')
+				.colors(4);
 
-				theme.onBrandColor = setOnColorBasedOnLuminance(luminance);
-				root.style.setProperty(`--forge-theme-on-${colorType}`, theme.onBrandColor);
-				break;
+			theme[`on${colorType}ContainerColors`] = chroma
+				.scale([
+					theme[`${colorType}ContainerColors`].at(-1),
+					theme[`${colorType}ContainerColors`].at(0)
+				])
+				.mode('lab')
+				.colors(4);
 
-			case 'primary':
-				theme.primaryColor = newColor;
-				theme.primaryContainerColors = chroma
-					.scale([theme.primaryColor, theme.primaryColorLightest])
-					.mode('lab')
-					.colors(4);
+			theme[`${colorType}ColorLevels`].forEach((level) => {
+				root.style.setProperty(`${level.level}`, level.color);
+			});
 
-				theme.onPrimaryContainerColors = chroma
-					.scale([theme.primaryContainerColors.at(-1), theme.primaryContainerColors.at(0)])
-					.mode('lab')
-					.colors(4);
-
-				theme.primaryColorLevels.forEach((level) => {
-					root.style.setProperty(`${level.level}`, level.color);
-				});
-
-				theme.onPrimaryColorLevels.forEach((level) => {
-					root.style.setProperty(`${level.level}`, level.color);
-				});
-
-				theme.onPrimaryColor = setOnColorBasedOnLuminance(luminance);
-				root.style.setProperty(`--forge-theme-on-${colorType}`, theme.onPrimaryColor);
-				break;
-
-			case 'secondary':
-				theme.secondaryColor = newColor;
-				theme.secondaryContainerColors = chroma
-					.scale([theme.secondaryColor, theme.secondaryColorLightest])
-					.mode('lab')
-					.colors(4);
-
-				theme.onSecondaryContainerColors = chroma
-					.scale([theme.secondaryContainerColors.at(-1), theme.secondaryContainerColors.at(0)])
-					.mode('lab')
-					.colors(4);
-
-				theme.secondaryColorLevels.forEach((level) => {
-					root.style.setProperty(`${level.level}`, level.color);
-				});
-
-				theme.onSecondaryColorLevels.forEach((level) => {
-					root.style.setProperty(`${level.level}`, level.color);
-				});
-
-				theme.onSecondaryColor = setOnColorBasedOnLuminance(luminance);
-				root.style.setProperty(`--forge-theme-on-${colorType}`, theme.onSecondaryColor);
-				break;
-
-			case 'tertiary':
-				theme.tertiaryColor = newColor;
-				theme.tertiaryContainerColors = chroma
-					.scale([theme.tertiaryColor, theme.tertiaryColorLightest])
-					.mode('lab')
-					.colors(4);
-
-				theme.onTertiaryContainerColors = chroma
-					.scale([theme.tertiaryContainerColors.at(-1), theme.tertiaryContainerColors.at(0)])
-					.mode('lab')
-					.colors(4);
-
-				theme.tertiaryColorLevels.forEach((level) => {
-					root.style.setProperty(`${level.level}`, level.color);
-				});
-
-				theme.onTertiaryColorLevels.forEach((level) => {
-					root.style.setProperty(`${level.level}`, level.color);
-				});
-
-				theme.onTertiaryColor = setOnColorBasedOnLuminance(luminance);
-				root.style.setProperty(`--forge-theme-on-${colorType}`, theme.onTertiaryColor);
-				break;
-			default:
-				console.log(`No color prop has been used`);
+			theme[`on${colorType}ColorLevels`].forEach((level) => {
+				root.style.setProperty(`${level.level}`, level.color);
+			});
 		}
 
+		theme[`on${colorType}Color`] = setOnColorBasedOnLuminance(luminance);
+		root.style.setProperty(`--forge-theme-on-${colorType}`, theme[`on${colorType}Color`]);
 		root.style.setProperty(`--forge-theme-${colorType}`, newColor);
 	};
 
@@ -135,43 +67,14 @@
 <forge-stack gap="8">
 	<forge-text-field label-position="block-start">
 		<label for={colorType}>{colorType} Color</label>
-		{#if colorType === 'primary'}
-			<input
-				type="text"
-				id={colorType}
-				bind:value={theme.primaryColor}
-				oninput={(e) => {
-					onColorChange(e.target.value);
-				}}
-			/>
-		{:else if colorType === 'brand'}
-			<input
-				type="text"
-				id={colorType}
-				bind:value={theme.brandColor}
-				oninput={(e) => {
-					onColorChange(e.target.value);
-				}}
-			/>
-		{:else if colorType === 'secondary'}
-			<input
-				type="text"
-				id={colorType}
-				bind:value={theme.secondaryColor}
-				oninput={(e) => {
-					onColorChange(e.target.value);
-				}}
-			/>
-		{:else}
-			<input
-				type="text"
-				id={colorType}
-				bind:value={theme.tertiaryColor}
-				oninput={(e) => {
-					onColorChange(e.target.value);
-				}}
-			/>
-		{/if}
+		<input
+			type="text"
+			id={colorType}
+			bind:value={theme[`${colorType}Color`]}
+			oninput={(e) => {
+				onColorChange(e.target.value);
+			}}
+		/>
 
 		<forge-icon-button
 			aria-label="Default icon button"

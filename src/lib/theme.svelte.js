@@ -4,7 +4,7 @@ class Theme {
 
 	// BRAND
 	#brandColor = $state({ value: '#000' });
-	#onBrandColor = $state({ value: 'white' });
+	#onbrandColor = $state({ value: 'white' });
 
 	get brandColor() {
 		return this.#brandColor.value;
@@ -14,20 +14,20 @@ class Theme {
 		this.#brandColor.value = value;
 	}
 
-	get onBrandColor() {
-		return this.#onBrandColor.value;
+	get onbrandColor() {
+		return this.#onbrandColor.value;
 	}
 
-	set onBrandColor(value) {
-		this.#onBrandColor.value = value;
+	set onbrandColor(value) {
+		this.#onbrandColor.value = value;
 	}
 
 	// PRIMARY
 	#primaryColor = $state({ value: '#3f51b5' });
-	#onPrimaryColor = $state({ value: '' });
+	#onprimaryColor = $state({ value: '' });
 	#primaryColorLightest = $state({ value: '#f7f8fc' });
 	#primaryContainerColors = $state([]);
-	#onPrimaryContainerColors = $state([]);
+	#onprimaryContainerColors = $state([]);
 
 	primaryColorLevels = $derived.by(() => {
 		return this.containerColorLevels.map((level, index) => {
@@ -38,11 +38,11 @@ class Theme {
 		});
 	});
 
-	onPrimaryColorLevels = $derived.by(() => {
+	onprimaryColorLevels = $derived.by(() => {
 		return this.containerColorLevels.map((level, index) => {
 			return {
 				level: `${this.forgeThemePrefix}-on-primary-${level}`,
-				color: this.onPrimaryContainerColors[index]
+				color: this.onprimaryContainerColors[index]
 			};
 		});
 	});
@@ -55,12 +55,12 @@ class Theme {
 		this.#primaryColor.value = value;
 	}
 
-	get onPrimaryColor() {
-		return this.#onPrimaryColor.value;
+	get onprimaryColor() {
+		return this.#onprimaryColor.value;
 	}
 
-	set onPrimaryColor(value) {
-		this.#onPrimaryColor.value = value;
+	set onprimaryColor(value) {
+		this.#onprimaryColor.value = value;
 	}
 
 	get primaryColorLightest() {
@@ -75,20 +75,20 @@ class Theme {
 		this.#primaryContainerColors = value;
 	}
 
-	get onPrimaryContainerColors() {
-		return this.#onPrimaryContainerColors;
+	get onprimaryContainerColors() {
+		return this.#onprimaryContainerColors;
 	}
 
-	set onPrimaryContainerColors(value) {
-		this.#onPrimaryContainerColors = value;
+	set onprimaryContainerColors(value) {
+		this.#onprimaryContainerColors = value;
 	}
 
 	// SECONDARY
 	#secondaryColor = $state({ value: '#ffc107' });
-	#onSecondaryColor = $state({ value: '' });
+	#onsecondaryColor = $state({ value: '' });
 	#secondaryColorLightest = $state({ value: '#fffdf5' });
 	#secondaryContainerColors = $state([]);
-	#onSecondaryContainerColors = $state([]);
+	#onsecondaryContainerColors = $state([]);
 
 	secondaryColorLevels = $derived.by(() => {
 		return this.containerColorLevels.map((level, index) => {
@@ -99,11 +99,11 @@ class Theme {
 		});
 	});
 
-	onSecondaryColorLevels = $derived.by(() => {
+	onsecondaryColorLevels = $derived.by(() => {
 		return this.containerColorLevels.map((level, index) => {
 			return {
 				level: `${this.forgeThemePrefix}-on-secondary-${level}`,
-				color: this.onSecondaryContainerColors[index]
+				color: this.onsecondaryContainerColors[index]
 			};
 		});
 	});
@@ -116,12 +116,12 @@ class Theme {
 		this.#secondaryColor.value = value;
 	}
 
-	get onSecondaryColor() {
-		return this.#onSecondaryColor.value;
+	get onsecondaryColor() {
+		return this.#onsecondaryColor.value;
 	}
 
-	set onSecondaryColor(value) {
-		this.#onSecondaryColor.value = value;
+	set onsecondaryColor(value) {
+		this.#onsecondaryColor.value = value;
 	}
 
 	get secondaryColorLightest() {
@@ -136,20 +136,20 @@ class Theme {
 		this.#secondaryContainerColors = value;
 	}
 
-	get onSecondaryContainerColors() {
-		return this.#onSecondaryContainerColors;
+	get onsecondaryContainerColors() {
+		return this.#onsecondaryContainerColors;
 	}
 
-	set onSecondaryContainerColors(value) {
-		this.#onSecondaryContainerColors = value;
+	set onsecondaryContainerColors(value) {
+		this.#onsecondaryContainerColors = value;
 	}
 
 	// TERTIARY
 	#tertiaryColor = $state({ value: '#3d5afe' });
-	#onTertiaryColor = $state({ value: '' });
+	#ontertiaryColor = $state({ value: '' });
 	#tertiaryColorLightest = $state({ value: '#f7f8ff' });
 	#tertiaryContainerColors = $state([]);
-	#onTertiaryContainerColors = $state([]);
+	#ontertiaryContainerColors = $state([]);
 
 	tertiaryColorLevels = $derived.by(() => {
 		return this.containerColorLevels.map((level, index) => {
@@ -160,11 +160,11 @@ class Theme {
 		});
 	});
 
-	onTertiaryColorLevels = $derived.by(() => {
+	ontertiaryColorLevels = $derived.by(() => {
 		return this.containerColorLevels.map((level, index) => {
 			return {
 				level: `${this.forgeThemePrefix}-on-tertiary-${level}`,
-				color: this.onTertiaryContainerColors[index]
+				color: this.ontertiaryContainerColors[index]
 			};
 		});
 	});
@@ -177,12 +177,12 @@ class Theme {
 		this.#tertiaryColor.value = value;
 	}
 
-	get onTertiaryColor() {
-		return this.#onTertiaryColor.value;
+	get ontertiaryColor() {
+		return this.#ontertiaryColor.value;
 	}
 
-	set onTertiaryColor(value) {
-		this.#onTertiaryColor.value = value;
+	set ontertiaryColor(value) {
+		this.#ontertiaryColor.value = value;
 	}
 
 	get tertiaryColorLightest() {
@@ -197,12 +197,12 @@ class Theme {
 		this.#tertiaryContainerColors = value;
 	}
 
-	get onTertiaryContainerColors() {
-		return this.#onTertiaryContainerColors;
+	get ontertiaryContainerColors() {
+		return this.#ontertiaryContainerColors;
 	}
 
-	set onTertiaryContainerColors(value) {
-		this.#onTertiaryContainerColors = value;
+	set ontertiaryContainerColors(value) {
+		this.#ontertiaryContainerColors = value;
 	}
 }
 
