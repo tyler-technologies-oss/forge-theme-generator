@@ -3,8 +3,8 @@ class Theme {
 	containerColorLevels = ['container-minimum', 'container-low', 'container', 'container-high'];
 
 	// BRAND
-	#brandColor = $state({ value: '' });
-	#onBrandColor = $state({ value: '' });
+	#brandColor = $state({ value: '#000' });
+	#onBrandColor = $state({ value: 'white' });
 
 	get brandColor() {
 		return this.#brandColor.value;

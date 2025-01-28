@@ -50,10 +50,10 @@
 									<div id="textToCopy">
 										&#123;
 										<div class="forge-typography--label3 spacer">
-											--forge-theme-brand: {theme.primaryColor};
+											--forge-theme-brand: {theme.brandColor};
 										</div>
 										<div class="forge-typography--label3 spacer">
-											--forge-theme-on-brand: {theme.primaryColor};
+											--forge-theme-on-brand: {theme.onBrandColor};
 										</div>
 										<div class="forge-typography--label3 spacer">
 											--forge-theme-primary: {theme.primaryColor};

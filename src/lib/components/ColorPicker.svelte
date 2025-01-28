@@ -16,6 +16,9 @@
 	$effect(() => {
 		root = document.documentElement;
 		if (!firstLoad) {
+			if (colorType === 'brand') {
+				setColors(theme.brandColor);
+			}
 			if (colorType === 'primary') {
 				setColors(theme.primaryColor);
 			}
