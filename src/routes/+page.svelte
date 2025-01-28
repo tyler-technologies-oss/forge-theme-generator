@@ -14,6 +14,7 @@
 	<forge-drawer slot="body-left" style="--forge-drawer-width: 320px;">
 		<div style="padding: 16px">
 			<forge-stack gap="32">
+				<ColorPicker colorType="brand" />
 				<ColorPicker colorType="primary" />
 				<ColorPicker colorType="secondary" />
 				<ColorPicker colorType="tertiary" />
@@ -52,13 +53,25 @@
 											--forge-theme-brand: {theme.primaryColor};
 										</div>
 										<div class="forge-typography--label3 spacer">
+											--forge-theme-on-brand: {theme.primaryColor};
+										</div>
+										<div class="forge-typography--label3 spacer">
 											--forge-theme-primary: {theme.primaryColor};
+										</div>
+										<div class="forge-typography--label3 spacer">
+											--forge-theme-on-primary: {theme.onPrimaryColor};
 										</div>
 										<div class="forge-typography--label3 spacer">
 											--forge-theme-secondary: {theme.secondaryColor};
 										</div>
 										<div class="forge-typography--label3 spacer">
+											--forge-theme-on-secondary: {theme.onSecondaryColor};
+										</div>
+										<div class="forge-typography--label3 spacer">
 											--forge-theme-tertiary: {theme.tertiaryColor};
+										</div>
+										<div class="forge-typography--label3 spacer">
+											--forge-theme-on-tertiary: {theme.onTertiaryColor};
 										</div>
 										{#each theme.primaryColorLevels as level}
 											<div class="forge-typography--label3 spacer">

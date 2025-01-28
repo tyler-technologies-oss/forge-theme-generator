@@ -5,6 +5,14 @@
 	let root = $state({});
 	let firstLoad = false;
 
+	const setOnColorBasedOnLuminance = (luminance) => {
+		if (luminance <= 0.25) {
+			return 'white';
+		} else {
+			return 'black';
+		}
+	};
+
 	$effect(() => {
 		root = document.documentElement;
 		if (!firstLoad) {
@@ -22,7 +30,17 @@
 	});
 
 	const setColors = (newColor) => {
+		const luminance = chroma(newColor).luminance();
+
 		switch (colorType) {
+			case 'brand':
+				theme.brandColor = newColor;
+				root.style.setProperty(`--forge-theme-brand`, newColor);
+
+				theme.onBrandColor = setOnColorBasedOnLuminance(luminance);
+				root.style.setProperty(`--forge-theme-on-${colorType}`, theme.onBrandColor);
+				break;
+
 			case 'primary':
 				theme.primaryColor = newColor;
 				theme.primaryContainerColors = chroma
@@ -42,6 +60,9 @@
 				theme.onPrimaryColorLevels.forEach((level) => {
 					root.style.setProperty(`${level.level}`, level.color);
 				});
+
+				theme.onPrimaryColor = setOnColorBasedOnLuminance(luminance);
+				root.style.setProperty(`--forge-theme-on-${colorType}`, theme.onPrimaryColor);
 				break;
 
 			case 'secondary':
@@ -63,6 +84,9 @@
 				theme.onSecondaryColorLevels.forEach((level) => {
 					root.style.setProperty(`${level.level}`, level.color);
 				});
+
+				theme.onSecondaryColor = setOnColorBasedOnLuminance(luminance);
+				root.style.setProperty(`--forge-theme-on-${colorType}`, theme.onSecondaryColor);
 				break;
 
 			case 'tertiary':
@@ -84,24 +108,15 @@
 				theme.onTertiaryColorLevels.forEach((level) => {
 					root.style.setProperty(`${level.level}`, level.color);
 				});
+
+				theme.onTertiaryColor = setOnColorBasedOnLuminance(luminance);
+				root.style.setProperty(`--forge-theme-on-${colorType}`, theme.onTertiaryColor);
 				break;
 			default:
 				console.log(`No color prop has been used`);
 		}
 
 		root.style.setProperty(`--forge-theme-${colorType}`, newColor);
-		if (colorType === 'primary') {
-			root.style.setProperty(`--forge-theme-brand`, `${theme.primaryColor}`);
-		}
-
-		let luminance = chroma(newColor).luminance();
-		if (luminance <= 0.3) {
-			root.style.setProperty(`--forge-theme-on-${colorType}`, `white`);
-			// root.style.setProperty(`--forge-theme-on-brand`, `white`);
-		} else {
-			root.style.setProperty(`--forge-theme-on-${colorType}`, `black`);
-			// root.style.setProperty(`--forge-theme-on-brand`, `black`);
-		}
 	};
 
 	const onColorChange = (color) => {

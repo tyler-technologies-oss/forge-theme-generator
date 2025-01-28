@@ -2,8 +2,29 @@ class Theme {
 	forgeThemePrefix = '--forge-theme';
 	containerColorLevels = ['container-minimum', 'container-low', 'container', 'container-high'];
 
+	// BRAND
+	#brandColor = $state({ value: '' });
+	#onBrandColor = $state({ value: '' });
+
+	get brandColor() {
+		return this.#brandColor.value;
+	}
+
+	set brandColor(value) {
+		this.#brandColor.value = value;
+	}
+
+	get onBrandColor() {
+		return this.#onBrandColor.value;
+	}
+
+	set onBrandColor(value) {
+		this.#onBrandColor.value = value;
+	}
+
 	// PRIMARY
 	#primaryColor = $state({ value: '#3f51b5' });
+	#onPrimaryColor = $state({ value: '' });
 	#primaryColorLightest = $state({ value: '#f7f8fc' });
 	#primaryContainerColors = $state([]);
 	#onPrimaryContainerColors = $state([]);
@@ -34,6 +55,14 @@ class Theme {
 		this.#primaryColor.value = value;
 	}
 
+	get onPrimaryColor() {
+		return this.#onPrimaryColor.value;
+	}
+
+	set onPrimaryColor(value) {
+		this.#onPrimaryColor.value = value;
+	}
+
 	get primaryColorLightest() {
 		return this.#primaryColorLightest.value;
 	}
@@ -56,6 +85,7 @@ class Theme {
 
 	// SECONDARY
 	#secondaryColor = $state({ value: '#ffc107' });
+	#onSecondaryColor = $state({ value: '' });
 	#secondaryColorLightest = $state({ value: '#fffdf5' });
 	#secondaryContainerColors = $state([]);
 	#onSecondaryContainerColors = $state([]);
@@ -86,6 +116,14 @@ class Theme {
 		this.#secondaryColor.value = value;
 	}
 
+	get onSecondaryColor() {
+		return this.#onSecondaryColor.value;
+	}
+
+	set onSecondaryColor(value) {
+		this.#onSecondaryColor.value = value;
+	}
+
 	get secondaryColorLightest() {
 		return this.#secondaryColorLightest.value;
 	}
@@ -108,6 +146,7 @@ class Theme {
 
 	// TERTIARY
 	#tertiaryColor = $state({ value: '#3d5afe' });
+	#onTertiaryColor = $state({ value: '' });
 	#tertiaryColorLightest = $state({ value: '#f7f8ff' });
 	#tertiaryContainerColors = $state([]);
 	#onTertiaryContainerColors = $state([]);
@@ -136,6 +175,14 @@ class Theme {
 
 	set tertiaryColor(value) {
 		this.#tertiaryColor.value = value;
+	}
+
+	get onTertiaryColor() {
+		return this.#onTertiaryColor.value;
+	}
+
+	set onTertiaryColor(value) {
+		this.#onTertiaryColor.value = value;
 	}
 
 	get tertiaryColorLightest() {
