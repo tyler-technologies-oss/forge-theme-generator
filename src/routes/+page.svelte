@@ -70,14 +70,14 @@
 											--forge-theme-tertiary: {theme.tertiaryColor};
 										</div>
 										<div class="forge-typography--label3 spacer">
-											--forge-theme-on-tertiary: {theme.onTertiaryColor};
+											--forge-theme-on-tertiary: {theme.ontertiaryColor};
 										</div>
 										{#each theme.primaryColorLevels as level}
 											<div class="forge-typography--label3 spacer">
 												{level.level}: {level.color};
 											</div>
 										{/each}
-										{#each theme.onPrimaryColorLevels as level}
+										{#each theme.onprimaryColorLevels as level}
 											<div class="forge-typography--label3 spacer">
 												{level.level}: {level.color};
 											</div>
@@ -87,7 +87,7 @@
 												{level.level}: {level.color};
 											</div>
 										{/each}
-										{#each theme.onSecondaryColorLevels as level}
+										{#each theme.onsecondaryColorLevels as level}
 											<div class="forge-typography--label3 spacer">
 												{level.level}: {level.color};
 											</div>
@@ -97,7 +97,7 @@
 												{level.level}: {level.color};
 											</div>
 										{/each}
-										{#each theme.onTertiaryColorLevels as level}
+										{#each theme.ontertiaryColorLevels as level}
 											<div class="forge-typography--label3 spacer">
 												{level.level}: {level.color};
 											</div>
