@@ -24,12 +24,8 @@
 		const value = event.detail.value;
 
 		const html = document.querySelector('html');
-		html.style.setProperty(`${CSS_PROP}-round`, `${value}px`);
+		html.style.setProperty(`${CSS_PROP}-factor`, `${value}`);
 		html.style.setProperty(`${CSS_PROP}-full`, `${value}px`);
-
-		shapeSizes.forEach((shape) => {
-			html.style.setProperty(`${CSS_PROP}-${shape.label}`, `${value}px`);
-		});
 	};
 </script>
 
@@ -39,9 +35,9 @@
 		bind:this={slider}
 		data-aria-label="Value"
 		min="0"
-		max="48"
-		value="8"
-		step="4"
+		max="12"
+		value="1"
+		step=".1"
 		onforge-slider-input={onSliderChange}
 	></forge-slider>
 </forge-stack>

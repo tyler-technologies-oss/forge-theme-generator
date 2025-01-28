@@ -1,6 +1,6 @@
 <script lang="ts">
 	let { children } = $props();
-	import '../app.css';
+	import '../app.scss';
 </script>
 
 <forge-app-bar title-text="Tyler Forge Theming" theme="white">

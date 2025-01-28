@@ -48,7 +48,6 @@
 							<forge-stack gap="4">
 								<forge-card>
 									<div id="textToCopy">
-										&#123;
 										<div class="forge-typography--label3 spacer">
 											--forge-theme-brand: {theme.brandColor};
 										</div>
@@ -103,7 +102,6 @@
 												{level.level}: {level.color};
 											</div>
 										{/each}
-										&#125;
 									</div>
 
 									<div class="button-container">
