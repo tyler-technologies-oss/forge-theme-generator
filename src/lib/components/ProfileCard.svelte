@@ -12,7 +12,7 @@
 	<forge-toolbar inverted>
 		<forge-button slot="start">View Profile</forge-button>
 		<forge-icon-button slot="end" aria-label="View notifications">
-			<forge-icon name="notifications"></forge-icon>
+			<forge-icon name="notifications" external></forge-icon>
 		</forge-icon-button>
 	</forge-toolbar>
 </forge-card>
