@@ -65,12 +65,27 @@
 												{level.level}: {level.color};
 											</div>
 										{/each}
+										{#each theme.onPrimaryColorLevels as level}
+											<div class="forge-typography--label3 spacer">
+												{level.level}: {level.color};
+											</div>
+										{/each}
 										{#each theme.secondaryColorLevels as level}
 											<div class="forge-typography--label3 spacer">
 												{level.level}: {level.color};
 											</div>
 										{/each}
+										{#each theme.onSecondaryColorLevels as level}
+											<div class="forge-typography--label3 spacer">
+												{level.level}: {level.color};
+											</div>
+										{/each}
 										{#each theme.tertiaryColorLevels as level}
+											<div class="forge-typography--label3 spacer">
+												{level.level}: {level.color};
+											</div>
+										{/each}
+										{#each theme.onTertiaryColorLevels as level}
 											<div class="forge-typography--label3 spacer">
 												{level.level}: {level.color};
 											</div>
