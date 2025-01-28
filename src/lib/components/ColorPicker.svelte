@@ -144,6 +144,15 @@
 					onColorChange(e.target.value);
 				}}
 			/>
+		{:else if colorType === 'brand'}
+			<input
+				type="text"
+				id={colorType}
+				bind:value={theme.brandColor}
+				oninput={(e) => {
+					onColorChange(e.target.value);
+				}}
+			/>
 		{:else if colorType === 'secondary'}
 			<input
 				type="text"
