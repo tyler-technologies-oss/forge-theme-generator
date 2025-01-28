@@ -94,6 +94,8 @@
 
 	[slot='body'] {
 		background-color: var(--forge-theme-surface-dim);
+		overflow-y: auto;
+		max-height: 768px;
 	}
 
 	.span-full {
