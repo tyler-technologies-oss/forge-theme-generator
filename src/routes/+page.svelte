@@ -52,19 +52,19 @@
 											--forge-theme-brand: {theme.brandColor};
 										</div>
 										<div class="forge-typography--label3 spacer">
-											--forge-theme-on-brand: {theme.onBrandColor};
+											--forge-theme-on-brand: {theme.onbrandColor};
 										</div>
 										<div class="forge-typography--label3 spacer">
 											--forge-theme-primary: {theme.primaryColor};
 										</div>
 										<div class="forge-typography--label3 spacer">
-											--forge-theme-on-primary: {theme.onPrimaryColor};
+											--forge-theme-on-primary: {theme.onprimaryColor};
 										</div>
 										<div class="forge-typography--label3 spacer">
 											--forge-theme-secondary: {theme.secondaryColor};
 										</div>
 										<div class="forge-typography--label3 spacer">
-											--forge-theme-on-secondary: {theme.onSecondaryColor};
+											--forge-theme-on-secondary: {theme.onsecondaryColor};
 										</div>
 										<div class="forge-typography--label3 spacer">
 											--forge-theme-tertiary: {theme.tertiaryColor};
