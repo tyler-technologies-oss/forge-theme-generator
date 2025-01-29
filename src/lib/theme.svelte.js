@@ -30,7 +30,7 @@ class Theme {
   }
 
   // BRAND
-  #brandColor = $state({ value: '#000' });
+  #brandColor = $state({ value: '#1e2b78' });
   #onbrandColor = $state({ value: 'white' });
 
   get brandColor() {
