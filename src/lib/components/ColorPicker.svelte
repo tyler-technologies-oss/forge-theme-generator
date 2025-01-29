@@ -1,10 +1,11 @@
 <script>
-  import chroma from 'chroma-js';
+  import chroma, { contrast } from 'chroma-js';
   import { theme } from '$lib/theme.svelte';
   let { colorType } = $props();
-  let root = $state({});
+  let demoContainer = $state({});
   let firstLoad = false;
   let luminance;
+  let showContrastWarning = $state({ value: false });
 
   const setOnColorBasedOnLuminance = (luminance) => {
     if (luminance <= 0.25) {
@@ -15,7 +16,7 @@
   };
 
   $effect(() => {
-    root = document.documentElement;
+    demoContainer = document.querySelector('#demo-container');
     if (!firstLoad) {
       setColors(theme[`${colorType}Color`]);
       firstLoad = true;
@@ -28,6 +29,7 @@
       return;
     }
     luminance = chroma(newColor).luminance();
+    theme[`${colorType}ColorLightest`] = chroma(newColor).brighten(4);
     theme[`${colorType}Color`] = newColor;
 
     // BRAND doesn't use any additional container colors
@@ -46,17 +48,30 @@
         .colors(4);
 
       theme[`${colorType}ColorLevels`].forEach((level) => {
-        root.style.setProperty(`${level.level}`, level.color);
+        demoContainer.style.setProperty(`${level.level}`, level.color);
       });
 
       theme[`on${colorType}ColorLevels`].forEach((level) => {
-        root.style.setProperty(`${level.level}`, level.color);
+        demoContainer.style.setProperty(`${level.level}`, level.color);
       });
+
+      let contrastTest = chroma.contrast(
+        theme[`${colorType}ContainerColors`].at(0),
+        theme[`on${colorType}ContainerColors`].at(0)
+      );
+
+      if (theme.enableColorContrastChecking) {
+        if (contrastTest < 4.5) {
+          showContrastWarning.value = true;
+        } else {
+          showContrastWarning.value = false;
+        }
+      }
     }
 
     theme[`on${colorType}Color`] = setOnColorBasedOnLuminance(luminance);
-    root.style.setProperty(`--forge-theme-on-${colorType}`, theme[`on${colorType}Color`]);
-    root.style.setProperty(`--forge-theme-${colorType}`, newColor);
+    demoContainer.style.setProperty(`--forge-theme-on-${colorType}`, theme[`on${colorType}Color`]);
+    demoContainer.style.setProperty(`--forge-theme-${colorType}`, newColor);
   };
 
   const onColorChange = (color) => {
@@ -65,7 +80,10 @@
 </script>
 
 <forge-stack gap="8">
-  <forge-text-field label-position="block-start">
+  <forge-text-field
+    label-position="block-start"
+    invalid={showContrastWarning.value ? 'true' : null}
+  >
     <label for={colorType}>{colorType} Color</label>
     <input
       type="text"
@@ -83,6 +101,14 @@
     >
       <forge-icon name="format_color_fill" external></forge-icon>
     </forge-icon-button>
+    {#if showContrastWarning.value}
+      <div slot="support-text">
+        <forge-inline-message theme="error">
+          <forge-icon slot="icon" name="warning" external></forge-icon>
+          <p>Color contrast ratio fell below 4.5</p>
+        </forge-inline-message>
+      </div>
+    {/if}
   </forge-text-field>
   <forge-popover
     anchor={`${colorType}-color-selector`}

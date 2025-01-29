@@ -23,9 +23,9 @@
   const onSliderChange = (event) => {
     const value = event.detail.value;
 
-    const html = document.querySelector('html');
-    html.style.setProperty(`${CSS_PROP}-factor`, `${value}`);
-    html.style.setProperty(`${CSS_PROP}-full`, `${value}px`);
+    const dc = document.querySelector('#demo-container');
+    dc.style.setProperty(`${CSS_PROP}-factor`, `${value}`);
+    dc.style.setProperty(`${CSS_PROP}-full`, `${value}px`);
   };
 </script>
 

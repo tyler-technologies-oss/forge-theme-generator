@@ -2,6 +2,8 @@ class Theme {
   forgeThemePrefix = '--forge-theme';
   containerColorLevels = ['container-minimum', 'container-low', 'container', 'container-high'];
   #density = $state({ value: 'default' });
+  #isDense = $state({ value: false });
+  #enableColorContrastChecking = $state({ value: false });
 
   get density() {
     return this.#density.value;
@@ -9,6 +11,22 @@ class Theme {
 
   set density(value) {
     this.#density.value = value;
+  }
+
+  get isDense() {
+    return this.#density.value;
+  }
+
+  set isDense(value) {
+    this.#density.value = value;
+  }
+
+  get enableColorContrastChecking() {
+    return this.#enableColorContrastChecking.value;
+  }
+
+  set enableColorContrastChecking(value) {
+    this.#enableColorContrastChecking.value = value;
   }
 
   // BRAND
@@ -76,6 +94,10 @@ class Theme {
     return this.#primaryColorLightest.value;
   }
 
+  set primaryColorLightest(value) {
+    this.#primaryColorLightest.value = value;
+  }
+
   get primaryContainerColors() {
     return this.#primaryContainerColors;
   }
@@ -137,6 +159,10 @@ class Theme {
     return this.#secondaryColorLightest.value;
   }
 
+  set secondaryColorLightest(value) {
+    this.#secondaryColorLightest.value = value;
+  }
+
   get secondaryContainerColors() {
     return this.#secondaryContainerColors;
   }
@@ -196,6 +222,10 @@ class Theme {
 
   get tertiaryColorLightest() {
     return this.#tertiaryColorLightest.value;
+  }
+
+  set tertiaryColorLightest(value) {
+    this.#tertiaryColorLightest.value = value;
   }
 
   get tertiaryContainerColors() {

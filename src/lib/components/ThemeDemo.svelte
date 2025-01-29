@@ -1,12 +1,14 @@
 <script>
+  import { theme } from '$lib/theme.svelte';
   import ChipsToolbar from './ChipsToolbar.svelte';
   import FooterToolbar from './FooterToolbar.svelte';
+  import ForgeMenuDemo from './ForgeMenuDemo.svelte';
   import FormDemo from './FormDemo.svelte';
   import ProfileCard from './ProfileCard.svelte';
   import RequestCard from './RequestCard.svelte';
 </script>
 
-<div class="container">
+<div class="container" id="demo-container">
   <div class="laptop">
     <div class="laptop__screen">
       <forge-scaffold class="scaffold-example">
@@ -17,7 +19,7 @@
         </div>
         <forge-drawer slot="body-left">
           <aside>
-            <forge-list navlist>
+            <forge-list navlist dense={theme.isDense}>
               <forge-list-item selected>
                 <forge-icon slot="start" name="inbox" external></forge-icon>
                 <a href="javascript: void(0)">Inbox</a>
@@ -38,7 +40,20 @@
           </aside>
         </forge-drawer>
         <div slot="body">
-          <ChipsToolbar />
+          <forge-toolbar>
+            <h2 class="forge-typography--heading3" slot="start">Theme demo</h2>
+            <div slot="end">
+              <ForgeMenuDemo />
+            </div>
+          </forge-toolbar>
+          <div class="chips-container">
+            <forge-chip-set>
+              <forge-chip value="payments">Payments</forge-chip>
+              <forge-chip value="bills">Bills</forge-chip>
+              <forge-chip value="adjustments">Adjustments</forge-chip>
+            </forge-chip-set>
+          </div>
+
           <div class="demo-grid padding-16">
             <ProfileCard />
             <FormDemo />
@@ -67,9 +82,13 @@
 </div>
 
 <style>
+  .chips-container {
+    padding-inline: var(--forge-spacing-medium);
+    padding-block-start: var(--forge-spacing-medium);
+  }
   .laptop {
     position: relative;
-    margin-inline: var(--forge-spacing-xxlarge);
+    margin-inline: 32px;
     /* max-width: 80rem; */
     max-width: 1440px;
   }

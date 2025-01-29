@@ -48,20 +48,23 @@
 
   const onSliderChange = (event) => {
     const value = event.detail.value;
-    const html = document.querySelector('html');
+    const dc = document.querySelector('#demo-container');
 
-    if (html) {
+    if (dc) {
       SPACE_LEVELS.forEach((level) => {
-        html.style.setProperty(`${CSS_PROP}-${level.label}`, `${level.size * value}px`);
+        dc.style.setProperty(`${CSS_PROP}-${level.label}`, `${level.size * value}px`);
       });
 
       if (value <= 0.75) {
+        theme.isDense = true;
         theme.density = 'extra-small';
       }
       if (value > 0.75 && value <= 1) {
+        theme.isDense = false;
         theme.density = 'default';
       }
       if (value > 1) {
+        theme.isDense = false;
         theme.density = 'extra-large';
       }
     }
