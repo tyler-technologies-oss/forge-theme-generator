@@ -34,12 +34,15 @@
     --forge-card-padding: 0;
   }
 
+  forge-card::part(root) {
+    border-left: 4px solid var(--forge-theme-primary);
+  }
+
   .grid-container {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: var(--forge-spacing-medium);
     align-items: center;
-    border-left: 4px solid var(--forge-theme-primary);
     padding: var(--forge-spacing-xsmall);
   }
 
