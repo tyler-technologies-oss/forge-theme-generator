@@ -63,17 +63,13 @@
 				</div>
 			</forge-scaffold>
 		</div>
-		<!-- <div class="laptop__bottom">
-			<div class="laptop__under"></div>
-		</div>
-		<div class="laptop__shadow"></div> -->
 	</div>
 </div>
 
 <style>
 	.laptop {
 		position: relative;
-		margin-inline: 48px;
+		margin-inline: var(--forge-spacing-xxlarge);
 		/* max-width: 80rem; */
 		max-width: 1440px;
 	}
@@ -105,7 +101,7 @@
 	.demo-grid {
 		display: grid;
 		grid-template-columns: 4fr 8fr;
-		gap: 16px;
+		gap: var(--forge-spacing-medium);
 	}
 
 	@media screen and (max-width: 1360px) {

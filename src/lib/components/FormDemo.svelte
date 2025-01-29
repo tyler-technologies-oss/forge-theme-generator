@@ -1,27 +1,31 @@
+<script>
+	import { theme } from '$lib/theme.svelte';
+</script>
+
 <forge-card>
 	<form>
-		<forge-text-field class="span-full">
+		<forge-text-field class="span-full" label-position="block-start" density={theme.density}>
 			<label for="input-text-01">Name</label>
 			<input type="text" id="input-text-1" />
 		</forge-text-field>
-		<forge-text-field class="grid-3">
+		<forge-text-field class="grid-3" label-position="block-start" density={theme.density}>
 			<label for="input-text-2">Street</label>
 			<input type="text" id="input-text-2" />
 		</forge-text-field>
-		<forge-text-field class="grid-3">
+		<forge-text-field class="grid-3" label-position="block-start" density={theme.density}>
 			<label for="input-text-3">State</label>
 			<input type="text" id="input-text-3" />
 		</forge-text-field>
 
-		<forge-text-field class="grid-2">
+		<forge-text-field class="grid-2" label-position="block-start" density={theme.density}>
 			<input type="text" id="input-text-4" />
 			<label for="input-text-4">Zip</label>
 		</forge-text-field>
-		<forge-text-field class="grid-2">
+		<forge-text-field class="grid-2" label-position="block-start" density={theme.density}>
 			<input type="text" id="input-text-5" />
 			<label for="input-text-5">Email</label>
 		</forge-text-field>
-		<forge-text-field class="grid-2">
+		<forge-text-field class="grid-2" label-position="block-start" density={theme.density}>
 			<input type="text" id="input-text-6" />
 			<label for="input-text-6">Phone</label>
 		</forge-text-field>
@@ -49,7 +53,7 @@
 <style>
 	form {
 		display: grid;
-		gap: 16px;
+		gap: var(--forge-spacing-medium);
 		grid-template-columns: repeat(6, 1fr);
 	}
 

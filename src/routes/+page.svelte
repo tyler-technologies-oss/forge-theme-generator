@@ -7,6 +7,7 @@
 	import ThemeDemo from '$lib/components/ThemeDemo.svelte';
 	import CopyToClipboardButton from '$lib/components/CopyToClipboardButton.svelte';
 	import ShapeSlider from '$lib/components/ShapeSlider.svelte';
+	import DensitySlider from '$lib/components/DensitySlider.svelte';
 	let dialog;
 </script>
 
@@ -19,6 +20,7 @@
 				<ColorPicker colorType="secondary" />
 				<ColorPicker colorType="tertiary" />
 				<ShapeSlider />
+				<DensitySlider />
 				<forge-button variant="raised" id="open-css-dialog">
 					<forge-icon name="code" external></forge-icon>
 					Get CSS
@@ -117,6 +119,18 @@
 	</forge-drawer>
 	<div class="demo-container" slot="body">
 		<ThemeDemo />
+		<div style="padding: 32px;">
+			{#each theme.primaryColorLevels as level}
+				<div class="forge-typography--label3 spacer">
+					{level.level}: {level.color};
+				</div>
+			{/each}
+			{#each theme.onprimaryColorLevels as level}
+				<div class="forge-typography--label3 spacer">
+					{level.level}: {level.color};
+				</div>
+			{/each}
+		</div>
 	</div>
 </forge-scaffold>
 
@@ -130,11 +144,11 @@
 		display: flex;
 		flex-direction: column;
 		width: 768px;
-		padding: 16px;
+		padding: var(--forge-spacing-medium);
 	}
 
 	.spacer {
-		padding-inline-start: 16px;
+		padding-inline-start: var(--forge-spacing-medium);
 	}
 
 	forge-card {
@@ -143,7 +157,7 @@
 
 	.button-container {
 		position: absolute;
-		top: 16px;
-		right: 16px;
+		top: var(--forge-spacing-medium);
+		right: var(--forge-spacing-medium);
 	}
 </style>

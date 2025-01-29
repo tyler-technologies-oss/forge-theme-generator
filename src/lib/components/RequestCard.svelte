@@ -40,7 +40,7 @@
 		gap: var(--forge-spacing-medium);
 		align-items: center;
 		border-left: 4px solid var(--forge-theme-primary);
-		padding: 8px;
+		padding: var(--forge-spacing-xsmall);
 	}
 
 	.illustration-container {

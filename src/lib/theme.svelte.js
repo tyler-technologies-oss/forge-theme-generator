@@ -1,6 +1,15 @@
 class Theme {
 	forgeThemePrefix = '--forge-theme';
 	containerColorLevels = ['container-minimum', 'container-low', 'container', 'container-high'];
+	#density = $state({ value: 'default' });
+
+	get density() {
+		return this.#density.value;
+	}
+
+	set density(value) {
+		this.#density.value = value;
+	}
 
 	// BRAND
 	#brandColor = $state({ value: '#000' });
