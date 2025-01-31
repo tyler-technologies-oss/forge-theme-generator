@@ -18,6 +18,7 @@
   $effect(() => {
     demoContainer = document.querySelector('#demo-container');
     if (!firstLoad) {
+      theme.primary.color;
       setColors(theme[`${colorType}Color`]);
       firstLoad = true;
     }
