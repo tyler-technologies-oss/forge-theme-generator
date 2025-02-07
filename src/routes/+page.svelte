@@ -8,7 +8,6 @@
   import CopyToClipboardButton from '$lib/components/CopyToClipboardButton.svelte';
   import ShapeSlider from '$lib/components/ShapeSlider.svelte';
   import DensitySlider from '$lib/components/DensitySlider.svelte';
-  import ColorContrastCheckbox from '$lib/components/ColorContrastCheckbox.svelte';
   import ThemeCardConfigurator from '$lib/components/ThemeCardConfigurator.svelte';
   import ColorPreview from '$lib/components/ColorPreview.svelte';
 </script>

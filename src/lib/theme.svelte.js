@@ -4,7 +4,6 @@ class Theme {
   containerColorLevels = ['container-minimum', 'container-low', 'container', 'container-high'];
   #density = $state({ value: 'default' });
   #isDense = $state({ value: false });
-  #enableColorContrastChecking = $state({ value: false });
 
   get density() {
     return this.#density.value;
@@ -22,24 +21,19 @@ class Theme {
     this.#density.value = value;
   }
 
-  get enableColorContrastChecking() {
-    return this.#enableColorContrastChecking.value;
-  }
-
-  set enableColorContrastChecking(value) {
-    this.#enableColorContrastChecking.value = value;
-  }
-
   #primary = new ThemeColor({
-    color: '#3f51b5'
+    color: '#3f51b5',
+    type: 'primary'
   });
 
   #secondary = new ThemeColor({
-    color: '#ffc107'
+    color: '#ffc107',
+    type: 'secondary'
   });
 
   #tertiary = new ThemeColor({
-    color: '#3d5afe'
+    color: '#3d5afe',
+    type: 'tertiary'
   });
 
   get primary() {

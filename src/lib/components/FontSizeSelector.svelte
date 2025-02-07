@@ -16,7 +16,6 @@
   };
 </script>
 
-{appState.fontSizeSelected}
 <forge-stack inline gap="0" alignment="center">
   <!-- svelte-ignore a11y_click_events_have_key_events -->
   <!-- svelte-ignore a11y_no_static_element_interactions -->

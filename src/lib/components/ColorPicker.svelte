@@ -4,9 +4,9 @@
   import { untrack } from 'svelte';
   let { colorType } = $props();
   let demoContainer = $state({});
-  let showContrastWarning = $state({ value: false });
 
   const getAccessibleTextColor = (containerColor, containerColorIndex) => {
+    const contrastRatio = 4.5;
     const stepSize = 0.025; // Adjust this for stronger or weaker brightening/darkening
     const maxAdjustments = 20000; // Prevent infinite loops by limiting adjustments
 
@@ -16,31 +16,28 @@
 
     if (chroma(containerColor).luminance() > 0.3) {
       // Background is light, so darken the text color
-      while (contrast < 4.5 && iterations < maxAdjustments) {
+      while (contrast < contrastRatio && iterations < maxAdjustments) {
         adjustedColor = adjustedColor.darken(stepSize);
         contrast = chroma.contrast(containerColor, adjustedColor.hex());
 
         if (adjustedColor.hex() === '#000000') {
-          console.log('color reached black');
           break;
         }
         iterations++;
       }
     } else {
       // Background is dark, so brighten the text color
-      while (contrast < 4.5 && iterations < maxAdjustments) {
+      while (contrast < contrastRatio && iterations < maxAdjustments) {
         adjustedColor = adjustedColor.brighten(stepSize);
         contrast = chroma.contrast(containerColor, adjustedColor.hex());
 
         if (adjustedColor.hex() === '#ffffff') {
-          console.log('color reached white');
           // This is a workaround for the primary-container-minimum default forge color not passing. This bumps it up a tiny bit to pass
-          if (contrast < 4.5 && containerColorIndex) {
+          if (contrast < contrastRatio && containerColorIndex) {
             theme[colorType].containerColors[containerColorIndex] = chroma(
               theme[colorType].containerColors[containerColorIndex]
             ).darken(0.1);
           }
-          console.log('color reached white');
           break;
         }
 
@@ -53,7 +50,7 @@
   $effect(() => {
     // $inspect(theme[colorType].containerColors);
     untrack(() => {
-      demoContainer = document.querySelector('#demo-container');
+      demoContainer = document.querySelector('html');
       setColors(theme[colorType].color);
     });
   });
@@ -95,11 +92,8 @@
 </script>
 
 <forge-stack gap="8">
-  <forge-text-field
-    label-position="block-start"
-    invalid={showContrastWarning.value ? 'true' : null}
-  >
-    <label for={colorType}>{colorType} Color</label>
+  <forge-text-field label-position="block-start">
+    <label for={`${colorType}-color-input`}>{colorType} Color</label>
     <input
       type="text"
       id={`${colorType}-color-input`}
@@ -109,21 +103,9 @@
       }}
     />
 
-    <forge-icon-button
-      aria-label="Default icon button"
-      slot="end"
-      id={`${colorType}-color-selector`}
-    >
+    <forge-icon-button aria-label="Open color picker" slot="end" id={`${colorType}-color-selector`}>
       <forge-icon name="format_color_fill" external></forge-icon>
     </forge-icon-button>
-    {#if showContrastWarning.value}
-      <div slot="support-text">
-        <forge-inline-message theme="error">
-          <forge-icon slot="icon" name="warning" external></forge-icon>
-          <p>Color contrast ratio fell below 4.5</p>
-        </forge-inline-message>
-      </div>
-    {/if}
   </forge-text-field>
   <forge-popover
     anchor={`${colorType}-color-selector`}

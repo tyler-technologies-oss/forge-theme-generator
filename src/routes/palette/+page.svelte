@@ -14,9 +14,9 @@
     </div>
     {#if theme.primary.colorLevels.length}
       <ColorPreview
-        level="primary"
+        level="--forge-theme-primary"
         color={theme.primary.color}
-        onLevel="on-primary"
+        onLevel="--forge-theme-on-primary"
         onColor={theme.primary.onColor}
       />
       {#each theme.primary.colorLevels as level, index}
@@ -34,9 +34,9 @@
     <span class="span-full">Secondary</span>
     {#if theme.secondary.colorLevels.length}
       <ColorPreview
-        level="secondary"
+        level="--forge-theme-secondary"
         color={theme.secondary.color}
-        onLevel="on-secondary"
+        onLevel="--forge-theme-on-secondary"
         onColor={theme.secondary.onColor}
       />
       {#each theme.secondary.colorLevels as level, index}
@@ -54,9 +54,9 @@
     <span class="span-full">Tertiary</span>
     {#if theme.tertiary.colorLevels.length}
       <ColorPreview
-        level="tertiary"
+        level="--forge-theme-tertiary"
         color={theme.tertiary.color}
-        onLevel="on-tertiary"
+        onLevel="--forge-theme-on-tertiary"
         onColor={theme.tertiary.onColor}
       />
       {#each theme.tertiary.colorLevels as level, index}

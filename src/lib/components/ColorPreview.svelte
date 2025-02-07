@@ -23,7 +23,7 @@
   </forge-toolbar>
   <div style="padding: var(--forge-spacing-medium);">
     <forge-stack inline alignment="center">
-      <div class="color-square" style="background-color: {color}; color: {onColor}">
+      <div class="color-square" style={`background-color: var(${level}); color: var(${onLevel})`}>
         <span class="fo" style={`font-size: ${appState.fontSizeSelected}px`}>Fo</span>
       </div>
       <forge-stack inline gap="8" alignment="center">
@@ -49,7 +49,7 @@
     position: relative;
     height: 64px;
     width: 64px;
-    border-radius: var(--forge-shape-medium);
+    border-radius: var(--forge-shape-factor);
   }
 
   .fo {

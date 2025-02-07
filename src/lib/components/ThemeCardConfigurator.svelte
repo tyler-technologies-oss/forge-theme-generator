@@ -1,6 +1,5 @@
 <script>
   import { theme } from '$lib/theme.svelte';
-  import ColorContrastCheckbox from './ColorContrastCheckbox.svelte';
   import ColorPicker from './ColorPicker.svelte';
   import CopyToClipboardButton from './CopyToClipboardButton.svelte';
   import DensitySlider from './DensitySlider.svelte';
@@ -18,7 +17,6 @@
       <ColorPicker colorType="tertiary" />
       <ShapeSlider />
       <DensitySlider />
-      <ColorContrastCheckbox />
       <forge-button variant="raised" id="open-css-dialog">
         <forge-icon name="code" external></forge-icon>
         Get CSS
