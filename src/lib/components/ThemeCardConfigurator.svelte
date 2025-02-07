@@ -3,6 +3,7 @@
   import ColorPicker from './ColorPicker.svelte';
   import CopyToClipboardButton from './CopyToClipboardButton.svelte';
   import DensitySlider from './DensitySlider.svelte';
+  import DesiredContrastRatio from './DesiredContrastRatio.svelte';
   import ShapeSlider from './ShapeSlider.svelte';
 
   let dialog;
@@ -15,6 +16,7 @@
       <ColorPicker colorType="primary" />
       <ColorPicker colorType="secondary" />
       <ColorPicker colorType="tertiary" />
+      <DesiredContrastRatio />
       <ShapeSlider />
       <DensitySlider />
       <forge-button variant="raised" id="open-css-dialog">

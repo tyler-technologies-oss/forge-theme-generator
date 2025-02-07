@@ -4,6 +4,7 @@ class Theme {
   containerColorLevels = ['container-minimum', 'container-low', 'container', 'container-high'];
   #density = $state({ value: 'default' });
   #isDense = $state({ value: false });
+  #desiredContrastRatio = $state({ value: '10' });
 
   get density() {
     return this.#density.value;
@@ -19,6 +20,14 @@ class Theme {
 
   set isDense(value) {
     this.#density.value = value;
+  }
+
+  get desiredContrastRatio() {
+    return this.#desiredContrastRatio.value;
+  }
+
+  set desiredContrastRatio(value) {
+    this.#desiredContrastRatio.value = value;
   }
 
   #primary = new ThemeColor({
