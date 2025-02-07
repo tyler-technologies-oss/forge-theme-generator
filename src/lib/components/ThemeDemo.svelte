@@ -8,7 +8,7 @@
   import RequestCard from './RequestCard.svelte';
 </script>
 
-<div class="container" id="demo-container">
+<div class="container">
   <div class="laptop">
     <div class="laptop__screen">
       <forge-scaffold class="scaffold-example">

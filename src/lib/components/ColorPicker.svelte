@@ -1,26 +1,58 @@
 <script>
   import chroma, { contrast } from 'chroma-js';
   import { theme } from '$lib/theme.svelte';
+  import { untrack } from 'svelte';
   let { colorType } = $props();
   let demoContainer = $state({});
-  let firstLoad = false;
-  let luminance;
-  let showContrastWarning = $state({ value: false });
 
-  const setOnColorBasedOnLuminance = (luminance) => {
-    if (luminance <= 0.25) {
-      return 'white';
+  const getAccessibleTextColor = (containerColor, containerColorIndex) => {
+    const contrastRatio = 4.5;
+    const stepSize = 0.025; // Adjust this for stronger or weaker brightening/darkening
+    const maxAdjustments = 20000; // Prevent infinite loops by limiting adjustments
+
+    let adjustedColor = chroma(containerColor);
+    let contrast = chroma.contrast(containerColor, adjustedColor.hex());
+    let iterations = 0;
+
+    if (chroma(containerColor).luminance() > 0.3) {
+      // Background is light, so darken the text color
+      while (contrast < contrastRatio && iterations < maxAdjustments) {
+        adjustedColor = adjustedColor.darken(stepSize);
+        contrast = chroma.contrast(containerColor, adjustedColor.hex());
+
+        if (adjustedColor.hex() === '#000000') {
+          break;
+        }
+        iterations++;
+      }
     } else {
-      return 'black';
+      // Background is dark, so brighten the text color
+      while (contrast < contrastRatio && iterations < maxAdjustments) {
+        adjustedColor = adjustedColor.brighten(stepSize);
+        contrast = chroma.contrast(containerColor, adjustedColor.hex());
+
+        if (adjustedColor.hex() === '#ffffff') {
+          // This is a workaround for the primary-container-minimum default forge color not passing. This bumps it up a tiny bit to pass
+          if (contrast < contrastRatio && containerColorIndex) {
+            theme[colorType].containerColors[containerColorIndex] = chroma(
+              theme[colorType].containerColors[containerColorIndex]
+            ).darken(0.1);
+          }
+          break;
+        }
+
+        iterations++;
+      }
     }
+    return adjustedColor.hex();
   };
 
   $effect(() => {
-    demoContainer = document.querySelector('#demo-container');
-    if (!firstLoad) {
-      setColors(theme[`${colorType}Color`]);
-      firstLoad = true;
-    }
+    // $inspect(theme[colorType].containerColors);
+    untrack(() => {
+      demoContainer = document.querySelector('#demo-container');
+      setColors(theme[colorType].color);
+    });
   });
 
   const setColors = (newColor) => {
@@ -28,50 +60,30 @@
     if (!isValidColor) {
       return;
     }
-    luminance = chroma(newColor).luminance();
-    theme[`${colorType}ColorLightest`] = chroma(newColor).brighten(4);
-    theme[`${colorType}Color`] = newColor;
 
-    // BRAND doesn't use any additional container colors
-    if (colorType !== 'brand') {
-      theme[`${colorType}ContainerColors`] = chroma
-        .scale([theme[`${colorType}Color`], theme[`${colorType}ColorLightest`]])
-        .mode('lab')
-        .colors(4);
+    theme[colorType].color = newColor;
+    theme[colorType].onColor = getAccessibleTextColor(newColor);
+    theme[colorType].colorLightest = chroma(newColor).tint(0.95);
 
-      theme[`on${colorType}ContainerColors`] = chroma
-        .scale([
-          theme[`${colorType}ContainerColors`].at(-1),
-          theme[`${colorType}ContainerColors`].at(0)
-        ])
-        .mode('lab')
-        .colors(4);
+    theme[colorType].containerColors = chroma
+      .scale([chroma(newColor).brighten(2), theme[colorType].colorLightest])
+      .mode('hsl')
+      .colors(theme.containerColorLevels.length);
 
-      theme[`${colorType}ColorLevels`].forEach((level) => {
-        demoContainer.style.setProperty(`${level.level}`, level.color);
-      });
+    theme[colorType].onContainerColors = theme[colorType].containerColors.map((cc, index) =>
+      getAccessibleTextColor(cc, index)
+    );
 
-      theme[`on${colorType}ColorLevels`].forEach((level) => {
-        demoContainer.style.setProperty(`${level.level}`, level.color);
-      });
+    theme[colorType].colorLevels.forEach((level) => {
+      demoContainer.style.setProperty(`${level.level}`, level.color);
+    });
 
-      let contrastTest = chroma.contrast(
-        theme[`${colorType}ContainerColors`].at(0),
-        theme[`on${colorType}ContainerColors`].at(0)
-      );
+    theme[colorType].onColorLevels.forEach((level) => {
+      demoContainer.style.setProperty(`${level.level}`, level.color);
+    });
 
-      if (theme.enableColorContrastChecking) {
-        if (contrastTest < 4.5) {
-          showContrastWarning.value = true;
-        } else {
-          showContrastWarning.value = false;
-        }
-      }
-    }
-
-    theme[`on${colorType}Color`] = setOnColorBasedOnLuminance(luminance);
-    demoContainer.style.setProperty(`--forge-theme-on-${colorType}`, theme[`on${colorType}Color`]);
-    demoContainer.style.setProperty(`--forge-theme-${colorType}`, newColor);
+    demoContainer.style.setProperty(`--forge-theme-on-${colorType}`, theme[colorType].onColor);
+    demoContainer.style.setProperty(`--forge-theme-${colorType}`, theme[colorType].color);
   };
 
   const onColorChange = (color) => {
@@ -80,35 +92,20 @@
 </script>
 
 <forge-stack gap="8">
-  <forge-text-field
-    label-position="block-start"
-    invalid={showContrastWarning.value ? 'true' : null}
-  >
-    <label for={colorType}>{colorType} Color</label>
+  <forge-text-field label-position="block-start">
+    <label for={`${colorType}-color-input`}>{colorType} Color</label>
     <input
       type="text"
-      id={colorType}
-      bind:value={theme[`${colorType}Color`]}
+      id={`${colorType}-color-input`}
+      bind:value={theme[colorType].color}
       oninput={(e) => {
         onColorChange(e.target.value);
       }}
     />
 
-    <forge-icon-button
-      aria-label="Default icon button"
-      slot="end"
-      id={`${colorType}-color-selector`}
-    >
+    <forge-icon-button aria-label="Open color picker" slot="end" id={`${colorType}-color-selector`}>
       <forge-icon name="format_color_fill" external></forge-icon>
     </forge-icon-button>
-    {#if showContrastWarning.value}
-      <div slot="support-text">
-        <forge-inline-message theme="error">
-          <forge-icon slot="icon" name="warning" external></forge-icon>
-          <p>Color contrast ratio fell below 4.5</p>
-        </forge-inline-message>
-      </div>
-    {/if}
   </forge-text-field>
   <forge-popover
     anchor={`${colorType}-color-selector`}

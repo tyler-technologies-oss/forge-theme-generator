@@ -1,6 +1,5 @@
 <script>
   import { theme } from '$lib/theme.svelte';
-  import ColorContrastCheckbox from './ColorContrastCheckbox.svelte';
   import ColorPicker from './ColorPicker.svelte';
   import CopyToClipboardButton from './CopyToClipboardButton.svelte';
   import DensitySlider from './DensitySlider.svelte';
@@ -12,13 +11,12 @@
 <forge-card class="container-card">
   <div>
     <forge-stack gap="32">
-      <ColorPicker colorType="brand" />
+      <!-- <ColorPicker colorType="brand" /> -->
       <ColorPicker colorType="primary" />
       <ColorPicker colorType="secondary" />
       <ColorPicker colorType="tertiary" />
       <ShapeSlider />
       <DensitySlider />
-      <ColorContrastCheckbox />
       <forge-button variant="raised" id="open-css-dialog">
         <forge-icon name="code" external></forge-icon>
         Get CSS

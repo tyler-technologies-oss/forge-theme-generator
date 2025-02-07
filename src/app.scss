@@ -1,12 +1,5 @@
+@use '@tylertech/forge/dist/forge-core.css';
 @use '@tylertech/forge/dist/forge.css';
-
-body {
-  margin: 0;
-  padding: 0;
-  height: 100dvh;
-  opacity: 1;
-  background-blend-mode: lighten;
-}
 
 body::before {
   content: '';
