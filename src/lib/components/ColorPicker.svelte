@@ -50,7 +50,7 @@
   $effect(() => {
     // $inspect(theme[colorType].containerColors);
     untrack(() => {
-      demoContainer = document.querySelector('html');
+      demoContainer = document.querySelector('#demo-container');
       setColors(theme[colorType].color);
     });
   });
