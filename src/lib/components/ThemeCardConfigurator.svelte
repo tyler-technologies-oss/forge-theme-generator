@@ -12,7 +12,7 @@
 <forge-card class="container-card">
   <div>
     <forge-stack gap="32">
-      <ColorPicker colorType="brand" />
+      <!-- <ColorPicker colorType="brand" /> -->
       <ColorPicker colorType="primary" />
       <ColorPicker colorType="secondary" />
       <ColorPicker colorType="tertiary" />

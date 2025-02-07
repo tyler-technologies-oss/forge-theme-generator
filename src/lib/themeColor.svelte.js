@@ -1,16 +1,14 @@
 export class ThemeColor {
   constructor(config) {
-    this.#color.set(config.color);
-    this.#colorLightest.set(config.colorLightest);
+    this.color = config.color;
   }
 
   forgeThemePrefix = '--forge-theme';
   containerColorLevels = ['container-minimum', 'container-low', 'container', 'container-high'];
 
-  // PRIMARY
-  #color = $state({ value: '#3f51b5' });
+  #color = $state({ value: '' });
   #onColor = $state({ value: '' });
-  #colorLightest = $state({ value: '#f7f8fc' });
+  #colorLightest = $state({ value: '' });
   #containerColors = $state([]);
   #onContainerColors = $state([]);
 
@@ -18,7 +16,7 @@ export class ThemeColor {
     return this.containerColorLevels.map((level, index) => {
       return {
         level: `${this.forgeThemePrefix}-primary-${level}`,
-        color: this.primaryContainerColors[index]
+        color: this.containerColors[index]
       };
     });
   });
@@ -36,39 +34,39 @@ export class ThemeColor {
     return this.#color.value;
   }
 
-  set primaryColor(value) {
-    this.#primaryColor.value = value;
+  set color(value) {
+    this.#color.value = value;
   }
 
-  get onprimaryColor() {
-    return this.#onprimaryColor.value;
+  get onColor() {
+    return this.#onColor.value;
   }
 
-  set onprimaryColor(value) {
-    this.#onprimaryColor.value = value;
+  set onColor(value) {
+    this.#onColor.value = value;
   }
 
-  get primaryColorLightest() {
-    return this.#primaryColorLightest.value;
+  get colorLightest() {
+    return this.#colorLightest.value;
   }
 
-  set primaryColorLightest(value) {
-    this.#primaryColorLightest.value = value;
+  set colorLightest(value) {
+    this.#colorLightest.value = value;
   }
 
-  get primaryContainerColors() {
-    return this.#primaryContainerColors;
+  get containerColors() {
+    return this.#containerColors;
   }
 
-  set primaryContainerColors(value) {
-    this.#primaryContainerColors = value;
+  set containerColors(value) {
+    this.#containerColors = value;
   }
 
-  get onprimaryContainerColors() {
-    return this.#onprimaryContainerColors;
+  get onContainerColors() {
+    return this.#onContainerColors;
   }
 
-  set onprimaryContainerColors(value) {
-    this.#onprimaryContainerColors = value;
+  set onContainerColors(value) {
+    this.#onContainerColors = value;
   }
 }

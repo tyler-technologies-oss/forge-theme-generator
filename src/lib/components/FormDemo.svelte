@@ -39,14 +39,14 @@
       </forge-stack>
     </div>
 
-    <forge-radio-group class="grid-3">
+    <!-- <forge-radio-group class="grid-3">
       <forge-stack gap="0">
         <forge-label legend>Select one option</forge-label>
         <forge-radio value="option1" checked>Option 1</forge-radio>
         <forge-radio value="option2">Option 2</forge-radio>
         <forge-radio value="option3">Option 3</forge-radio>
       </forge-stack>
-    </forge-radio-group>
+    </forge-radio-group> -->
   </form>
 </forge-card>
 

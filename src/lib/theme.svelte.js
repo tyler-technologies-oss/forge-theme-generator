@@ -31,9 +31,40 @@ class Theme {
   }
 
   #primary = new ThemeColor({
-    color: '#3f51b5',
-    colorLightest: '#f7f8fc'
+    color: '#3f51b5'
   });
+
+  #secondary = new ThemeColor({
+    color: '#ffc107'
+  });
+
+  #tertiary = new ThemeColor({
+    color: '#3d5afe'
+  });
+
+  get primary() {
+    return this.#primary;
+  }
+
+  set primary(value) {
+    this.#primary.color.value = value;
+  }
+
+  get secondary() {
+    return this.#secondary;
+  }
+
+  set secondary(value) {
+    this.#secondary.color.value = value;
+  }
+
+  get tertiary() {
+    return this.#tertiary;
+  }
+
+  set tertiary(value) {
+    this.#tertiary.color.value = value;
+  }
 }
 
 export const theme = new Theme();
