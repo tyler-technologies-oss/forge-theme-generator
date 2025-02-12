@@ -17,9 +17,10 @@
       <input type="text" id="input-text-3" />
     </forge-text-field>
 
-    <forge-text-field class="grid-2" label-position="block-start" density={theme.density}>
-      <input type="text" id="input-text-4" />
-      <label for="input-text-4">Zip</label>
+    <forge-text-field class="grid-2" label-position="block-start" density={theme.density} invalid>
+      <input type="text" id="input-text-4" value="This is text" />
+      <label for="input-text-4">Zip code</label>
+      <span slot="support-text">Zip code must be a number</span>
     </forge-text-field>
     <forge-text-field class="grid-2" label-position="block-start" density={theme.density}>
       <input type="text" id="input-text-5" />
@@ -39,15 +40,20 @@
       </forge-stack>
     </div>
 
-    <!-- <forge-radio-group class="grid-3">
+    <forge-radio-group class="grid-3">
       <forge-stack gap="0">
         <forge-label legend>Select one option</forge-label>
         <forge-radio value="option1" checked>Option 1</forge-radio>
         <forge-radio value="option2">Option 2</forge-radio>
         <forge-radio value="option3">Option 3</forge-radio>
       </forge-stack>
-    </forge-radio-group> -->
+    </forge-radio-group>
   </form>
+
+  <!-- <forge-inline-message theme="success">
+    <forge-icon slot="icon" name="info" external></forge-icon>
+    <p>This is an inline message using the success theme</p>
+  </forge-inline-message> -->
 </forge-card>
 
 <style>

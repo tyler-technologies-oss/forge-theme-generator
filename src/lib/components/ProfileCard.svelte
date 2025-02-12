@@ -1,5 +1,6 @@
 <forge-card>
   <div class="container">
+    <forge-badge class="badge">Admin</forge-badge>
     <div class="avatar">
       <img src="https://png.pngtree.com/svg/20170602/0db185fb9c.svg" alt="Avatar" />
     </div>
@@ -24,6 +25,7 @@
   }
 
   .container {
+    position: relative;
     display: flex;
     justify-content: center;
     justify-items: center;
@@ -31,6 +33,12 @@
     align-content: center;
     align-items: center;
     margin-block-end: var(--forge-spacing-medium);
+  }
+
+  .badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
   }
 
   .container h2 {

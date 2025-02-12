@@ -16,6 +16,7 @@
           <forge-app-bar title-text="Tyler Forge">
             <forge-icon slot="logo" name="forge_logo" external external-type="custom"></forge-icon>
           </forge-app-bar>
+          <forge-banner theme="info">This is a forge-banner using the info theme.</forge-banner>
         </div>
         <forge-drawer slot="body-left">
           <aside>
@@ -41,7 +42,7 @@
         </forge-drawer>
         <div slot="body">
           <forge-toolbar>
-            <h2 class="forge-typography--heading3" slot="start">Theme demo</h2>
+            <h2 class="forge-typography--heading3" slot="start">Toolbar title</h2>
             <div slot="end">
               <ForgeMenuDemo />
             </div>

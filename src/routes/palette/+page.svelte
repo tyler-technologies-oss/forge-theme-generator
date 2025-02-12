@@ -4,98 +4,57 @@
   import { theme } from '$lib/theme.svelte';
 </script>
 
-<forge-stack gap="48">
-  <div class="grid">
-    <div class="span-full">
-      <div class="typography-selector-container">
-        <span>Primary</span>
-        <FontSizeSelector />
-      </div>
+{#snippet containerColorsByType(colorType)}
+  <forge-card class="outer-card">
+    <forge-toolbar>
+      <div slot="start" class="title">{colorType}</div>
+    </forge-toolbar>
+    <div class="grid">
+      {#if theme[colorType].colorLevels.length}
+        <ColorPreview
+          level="--forge-theme-{colorType}"
+          color={theme[colorType].color}
+          onLevel="--forge-theme-on-{colorType}"
+          onColor={theme[colorType].onColor}
+        />
+        {#each theme[colorType].colorLevels as level, index}
+          <ColorPreview
+            level={level.level}
+            color={level.color}
+            onLevel={theme[colorType].onColorLevels[index].level}
+            onColor={theme[colorType].onColorLevels[index].color}
+          />
+        {/each}
+      {/if}
     </div>
-    {#if theme.primary.colorLevels.length}
-      <ColorPreview
-        level="--forge-theme-primary"
-        color={theme.primary.color}
-        onLevel="--forge-theme-on-primary"
-        onColor={theme.primary.onColor}
-      />
-      {#each theme.primary.colorLevels as level, index}
-        <ColorPreview
-          level={level.level}
-          color={level.color}
-          onLevel={theme.primary.onColorLevels[index].level}
-          onColor={theme.primary.onColorLevels[index].color}
-        />
-      {/each}
-    {/if}
-  </div>
+  </forge-card>
+{/snippet}
 
-  <div class="grid">
-    <span class="span-full">Secondary</span>
-    {#if theme.secondary.colorLevels.length}
-      <ColorPreview
-        level="--forge-theme-secondary"
-        color={theme.secondary.color}
-        onLevel="--forge-theme-on-secondary"
-        onColor={theme.secondary.onColor}
-      />
-      {#each theme.secondary.colorLevels as level, index}
-        <ColorPreview
-          level={level.level}
-          color={level.color}
-          onLevel={theme.secondary.onColorLevels[index].level}
-          onColor={theme.secondary.onColorLevels[index].color}
-        />
-      {/each}
-    {/if}
-  </div>
-
-  <div class="grid">
-    <span class="span-full">Tertiary</span>
-    {#if theme.tertiary.colorLevels.length}
-      <ColorPreview
-        level="--forge-theme-tertiary"
-        color={theme.tertiary.color}
-        onLevel="--forge-theme-on-tertiary"
-        onColor={theme.tertiary.onColor}
-      />
-      {#each theme.tertiary.colorLevels as level, index}
-        <ColorPreview
-          level={level.level}
-          color={level.color}
-          onLevel={theme.tertiary.onColorLevels[index].level}
-          onColor={theme.tertiary.onColorLevels[index].color}
-        />
-      {/each}
-    {/if}
-  </div>
-
-  <div class="grid">
-    <span class="span-full">Surface</span>
-    {#if theme.surface.surfaceColorLevels.length}
-      <ColorPreview
-        level="--forge-theme-surface"
-        color={theme.surface.surfaceColor}
-        onLevel="--forge-theme-on-surface"
-        onColor={theme.surface.onSurfaceColor}
-      />
-      {#each theme.surface.surfaceColorLevels as level, index}
-        <ColorPreview
-          level={level.level}
-          color={level.color}
-          onLevel={theme.surface.onSurfaceColorLevels[index].level}
-          onColor={theme.surface.onSurfaceColorLevels[index].color}
-        />
-      {/each}
-    {/if}
-  </div>
-</forge-stack>
+<div class="page-container">
+  <forge-stack>
+    <div class="font-size-selector">
+      <FontSizeSelector />
+    </div>
+    {@render containerColorsByType('primary')}
+    {@render containerColorsByType('secondary')}
+    {@render containerColorsByType('tertiary')}
+    {@render containerColorsByType('success')}
+    {@render containerColorsByType('error')}
+    {@render containerColorsByType('warning')}
+    {@render containerColorsByType('info')}
+  </forge-stack>
+</div>
 
 <style>
-  .typography-selector-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .title {
+    text-transform: capitalize;
+  }
+  .page-container {
+    --max-width: 1600px;
+    max-width: var(--max-width);
+  }
+  .outer-card {
+    --forge-card-padding: 0;
   }
 
   .grid {
@@ -103,10 +62,14 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--forge-spacing-medium);
     height: fit-content;
-    max-width: 1320px;
+    max-width: var(--max-width);
+    padding: var(--forge-spacing-medium);
   }
 
-  .span-full {
-    grid-column: 1/-1;
+  .font-size-selector {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
   }
 </style>

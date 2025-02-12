@@ -16,7 +16,10 @@
       <ColorPicker colorType="primary" />
       <ColorPicker colorType="secondary" />
       <ColorPicker colorType="tertiary" />
-      <ColorPicker colorType="surface" />
+      <ColorPicker colorType="success" />
+      <ColorPicker colorType="error" />
+      <ColorPicker colorType="warning" />
+      <ColorPicker colorType="info" />
       <DesiredContrastRatio />
       <ShapeSlider />
       <DensitySlider />
@@ -62,56 +65,76 @@
         </forge-inline-message>
         <forge-card class="dialog-card">
           <div id="textToCopy">
-            <div class="forge-typography--label3 spacer">
+            <!-- <div class="forge-typography--label3 spacer">
               --forge-theme-brand: {theme.brandColor};
             </div>
             <div class="forge-typography--label3 spacer">
               --forge-theme-on-brand: {theme.onbrandColor};
+            </div> -->
+            <div class="forge-typography--label3 spacer">
+              --forge-theme-primary: {theme.primary.color};
             </div>
             <div class="forge-typography--label3 spacer">
-              --forge-theme-primary: {theme.primaryColor};
+              --forge-theme-on-primary: {theme.primary.onColor};
             </div>
             <div class="forge-typography--label3 spacer">
-              --forge-theme-on-primary: {theme.onprimaryColor};
+              --forge-theme-secondary: {theme.secondary.color};
             </div>
             <div class="forge-typography--label3 spacer">
-              --forge-theme-secondary: {theme.secondaryColor};
+              --forge-theme-on-secondary: {theme.secondary.onColor};
             </div>
             <div class="forge-typography--label3 spacer">
-              --forge-theme-on-secondary: {theme.onsecondaryColor};
+              --forge-theme-tertiary: {theme.tertiary.color};
             </div>
             <div class="forge-typography--label3 spacer">
-              --forge-theme-tertiary: {theme.tertiaryColor};
+              --forge-theme-on-tertiary: {theme.tertiary.onColor};
             </div>
-            <div class="forge-typography--label3 spacer">
-              --forge-theme-on-tertiary: {theme.ontertiaryColor};
-            </div>
-            {#each theme.primaryColorLevels as level}
+            {#each theme.primary.colorLevels as level}
               <div class="forge-typography--label3 spacer">
                 {level.level}: {level.color};
               </div>
             {/each}
-            {#each theme.onprimaryColorLevels as level}
+            {#each theme.primary.onColorLevels as level}
               <div class="forge-typography--label3 spacer">
                 {level.level}: {level.color};
               </div>
             {/each}
-            {#each theme.secondaryColorLevels as level}
+            {#each theme.secondary.colorLevels as level}
               <div class="forge-typography--label3 spacer">
                 {level.level}: {level.color};
               </div>
             {/each}
-            {#each theme.onsecondaryColorLevels as level}
+            {#each theme.secondary.onColorLevels as level}
               <div class="forge-typography--label3 spacer">
                 {level.level}: {level.color};
               </div>
             {/each}
-            {#each theme.tertiaryColorLevels as level}
+            {#each theme.tertiary.colorLevels as level}
               <div class="forge-typography--label3 spacer">
                 {level.level}: {level.color};
               </div>
             {/each}
-            {#each theme.ontertiaryColorLevels as level}
+            {#each theme.tertiary.onColorLevels as level}
+              <div class="forge-typography--label3 spacer">
+                {level.level}: {level.color};
+              </div>
+            {/each}
+            {#each theme.success.onColorLevels as level}
+              <div class="forge-typography--label3 spacer">
+                {level.level}: {level.color};
+              </div>
+            {/each}
+            {#each theme.error.onColorLevels as level}
+              <div class="forge-typography--label3 spacer">
+                {level.level}: {level.color};
+              </div>
+            {/each}
+            {#each theme.warning.onColorLevels as level}
+              <div class="forge-typography--label3 spacer">
+                {level.level}: {level.color};
+              </div>
+            {/each}
+            {#each theme.info.onColorLevels as level}
               <div class="forge-typography--label3 spacer">
                 {level.level}: {level.color};
               </div>

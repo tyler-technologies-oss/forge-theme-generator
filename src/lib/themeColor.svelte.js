@@ -94,6 +94,15 @@ export class ThemeColor {
 
     demoContainer.style.setProperty(`--forge-theme-on-${this.type}`, this.onColor);
     demoContainer.style.setProperty(`--forge-theme-${this.type}`, this.color);
+
+    // Manual override for neutral theme demo:
+    const overrideColor = '#f5f5f5';
+    demoContainer.style.setProperty(`--forge-theme-on-primary`, overrideColor);
+    demoContainer.style.setProperty(`--forge-theme-on-secondary`, overrideColor);
+    demoContainer.style.setProperty(`--forge-theme-on-tertiary`, overrideColor);
+    theme.primary.onColor = overrideColor;
+    theme.secondary.onColor = overrideColor;
+    theme.tertiary.onColor = overrideColor;
   };
 
   setSurfaceColors = (newColor) => {
