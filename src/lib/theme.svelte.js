@@ -1,7 +1,5 @@
 import { ThemeColor } from './themeColor.svelte';
 class Theme {
-  forgeThemePrefix = '--forge-theme';
-  containerColorLevels = ['container-minimum', 'container-low', 'container', 'container-high'];
   #density = $state({ value: 'default' });
   #isDense = $state({ value: false });
   #desiredContrastRatio = $state({ value: '5' });
