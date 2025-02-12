@@ -41,18 +41,18 @@
         </forge-drawer>
         <div slot="body">
           <forge-toolbar>
-            <h2 class="forge-typography--heading3" slot="start">Theme demo</h2>
+            <forge-stack slot="start" inline alignment="center">
+              <h2 class="forge-typography--heading3">Theme demo</h2>
+              <forge-chip-set type="filter">
+                <forge-chip value="payments">Payments</forge-chip>
+                <forge-chip value="bills">Bills</forge-chip>
+                <forge-chip value="adjustments">Adjustments</forge-chip>
+              </forge-chip-set>
+            </forge-stack>
             <div slot="end">
               <ForgeMenuDemo />
             </div>
           </forge-toolbar>
-          <div class="chips-container">
-            <forge-chip-set>
-              <forge-chip value="payments">Payments</forge-chip>
-              <forge-chip value="bills">Bills</forge-chip>
-              <forge-chip value="adjustments">Adjustments</forge-chip>
-            </forge-chip-set>
-          </div>
 
           <div class="demo-grid padding-16">
             <ProfileCard />
@@ -82,10 +82,6 @@
 </div>
 
 <style>
-  .chips-container {
-    padding-inline: var(--forge-spacing-medium);
-    padding-block-start: var(--forge-spacing-medium);
-  }
   .laptop {
     position: relative;
     margin-inline: 32px;
