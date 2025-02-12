@@ -69,6 +69,26 @@
       {/each}
     {/if}
   </div>
+
+  <div class="grid">
+    <span class="span-full">Surface</span>
+    {#if theme.surface.surfaceColorLevels.length}
+      <ColorPreview
+        level="--forge-theme-surface"
+        color={theme.surface.surfaceColor}
+        onLevel="--forge-theme-on-surface"
+        onColor={theme.surface.onSurfaceColor}
+      />
+      {#each theme.surface.surfaceColorLevels as level, index}
+        <ColorPreview
+          level={level.level}
+          color={level.color}
+          onLevel={theme.surface.onSurfaceColorLevels[index].level}
+          onColor={theme.surface.onSurfaceColorLevels[index].color}
+        />
+      {/each}
+    {/if}
+  </div>
 </forge-stack>
 
 <style>

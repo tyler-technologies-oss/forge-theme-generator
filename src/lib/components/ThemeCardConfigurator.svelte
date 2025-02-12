@@ -16,6 +16,7 @@
       <ColorPicker colorType="primary" />
       <ColorPicker colorType="secondary" />
       <ColorPicker colorType="tertiary" />
+      <ColorPicker colorType="surface" />
       <DesiredContrastRatio />
       <ShapeSlider />
       <DensitySlider />

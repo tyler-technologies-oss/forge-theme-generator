@@ -1,7 +1,5 @@
 import { ThemeColor } from './themeColor.svelte';
 class Theme {
-  forgeThemePrefix = '--forge-theme';
-  containerColorLevels = ['container-minimum', 'container-low', 'container', 'container-high'];
   #density = $state({ value: 'default' });
   #isDense = $state({ value: false });
   #desiredContrastRatio = $state({ value: '5' });
@@ -45,6 +43,11 @@ class Theme {
     type: 'tertiary'
   });
 
+  #surface = new ThemeColor({
+    color: '#ffffff',
+    type: 'surface'
+  });
+
   get primary() {
     return this.#primary;
   }
@@ -67,6 +70,14 @@ class Theme {
 
   set tertiary(value) {
     this.#tertiary.color.value = value;
+  }
+
+  get surface() {
+    return this.#surface;
+  }
+
+  set surface(value) {
+    this.#surface.color.value = value;
   }
 }
 

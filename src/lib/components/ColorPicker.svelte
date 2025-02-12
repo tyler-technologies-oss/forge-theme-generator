@@ -12,7 +12,11 @@
   });
 
   const onColorChange = (color) => {
-    theme[colorType].setColors(`${color}`);
+    if (colorType !== 'surface') {
+      theme[colorType].setColors(`${color}`);
+    } else {
+      theme[colorType].setSurfaceColors(`${color}`);
+    }
   };
 </script>
 
