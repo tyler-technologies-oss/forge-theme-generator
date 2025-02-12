@@ -70,7 +70,7 @@ export class ThemeColor {
     if (!isValidColor) {
       return;
     }
-    const demoContainer = document.querySelector('#demo-container');
+    const demoContainer = document.querySelector('html');
     this.color = newColor;
     this.onColor = this.getAccessibleTextColor(newColor);
     this.colorLightest = chroma(newColor).tint(0.95);

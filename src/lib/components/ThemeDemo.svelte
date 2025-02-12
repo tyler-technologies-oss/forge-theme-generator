@@ -62,10 +62,10 @@
               <RequestCard />
             </div>
 
-            <div class="span-full">
+            <!-- <div class="span-full">
               <forge-slider range data-aria-label-start="Start" data-aria-label-end="End"
               ></forge-slider>
-            </div>
+            </div> -->
           </div>
           <forge-stack inline justify="end">
             <forge-fab style="margin: 24px;">
