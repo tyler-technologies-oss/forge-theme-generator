@@ -1,19 +1,28 @@
 <script>
   import { goto } from '$app/navigation';
+  import { base } from '$app/paths';
   import { page } from '$app/stores';
 
   let tabBar;
   let currentUrl = $state({ value: '' });
 
   let pages = [
-    { url: '/', title: 'Home' },
-    { url: '/palette/', title: 'Color Palette' }
+    { url: `${base}`, title: 'Home' },
+    { url: `${base}/palette/`, title: 'Color Palette' }
   ];
 
   $effect(() => {
     currentUrl.value = window.location.pathname;
-    tabBar.activeTab = pages.findIndex((page) => page.url.includes(currentUrl.value));
+    if (currentUrl.value === `${base}/`) {
+      tabBar.activeTab = 0;
+    } else {
+      tabBar.activeTab = pages.findIndex((page) => page.url.includes(currentUrl.value));
+    }
   });
+
+  const setActiveTab = (url) => {
+    tabBar.activeTab = pages.findIndex((page) => page.url.includes(url));
+  };
 
   const onTabBarChange = (e) => {
     goto(pages[e].url);
