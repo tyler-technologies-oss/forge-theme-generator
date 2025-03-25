@@ -7,7 +7,7 @@
 
 <forge-scaffold>
   <div slot="header">
-    <forge-app-bar title-text="Tyler Forge Theming" theme="white">
+    <forge-app-bar title-text="Tyler Forge Theming" theme="white" href="/">
       <forge-icon slot="logo" name="forge_logo" external external-type="custom"></forge-icon>
       <div slot="end"><NavTabs /></div>
     </forge-app-bar>
