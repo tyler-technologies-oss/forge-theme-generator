@@ -47,13 +47,6 @@
               <ForgeMenuDemo />
             </div>
           </forge-toolbar>
-          <div class="chips-container">
-            <forge-chip-set>
-              <forge-chip value="payments">Payments</forge-chip>
-              <forge-chip value="bills">Bills</forge-chip>
-              <forge-chip value="adjustments">Adjustments</forge-chip>
-            </forge-chip-set>
-          </div>
 
           <div class="demo-grid padding-16">
             <ProfileCard />
@@ -83,10 +76,6 @@
 </div>
 
 <style>
-  .chips-container {
-    padding-inline: var(--forge-spacing-medium);
-    padding-block-start: var(--forge-spacing-medium);
-  }
   .laptop {
     position: relative;
     margin-inline: 32px;
