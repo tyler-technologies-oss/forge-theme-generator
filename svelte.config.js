@@ -6,6 +6,10 @@ const config = {
     adapter: adapter({ strict: false, fallback: 'index.html', pages: 'forge-theme-generator' }),
     prerender: {
       handleHttpError: 'warn'
+    },
+    paths: {
+      base: '/forge-theme-generator',
+      relative: false
     }
   }
 };
