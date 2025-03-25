@@ -7,7 +7,14 @@ export class ThemeColor {
   }
 
   forgeThemePrefix = '--forge-theme';
-  containerColorLevels = ['container-minimum', 'container-low', 'container', 'container-high'];
+  containerColorLevels = ['container-high', 'container', 'container-low', 'container-minimum'];
+  surfaceContainerColorLevels = [
+    ...this.containerColorLevels,
+    'inverse',
+    'dim',
+    'bright',
+    'bright-shadow'
+  ];
 
   #type = $state({ value: '' });
   #color = $state({ value: '' });
@@ -15,6 +22,12 @@ export class ThemeColor {
   #colorLightest = $state({ value: '' });
   #containerColors = $state([]);
   #onContainerColors = $state([]);
+
+  #surfaceColor = $state({ value: '' });
+  #onSurfaceColor = $state({ value: '' });
+  #surfaceColorLightest = $state({ value: '' });
+  #surfaceContainerColors = $state([]);
+  #onSurfaceContainerColors = $state([]);
 
   colorLevels = $derived.by(() => {
     return this.containerColorLevels.map((level, index) => {
@@ -34,19 +47,37 @@ export class ThemeColor {
     });
   });
 
+  surfaceColorLevels = $derived.by(() => {
+    return this.surfaceContainerColorLevels.map((level, index) => {
+      return {
+        level: `${this.forgeThemePrefix}-${this.type}-${level}`,
+        color: this.surfaceContainerColors[index]
+      };
+    });
+  });
+
+  onSurfaceColorLevels = $derived.by(() => {
+    return this.surfaceContainerColorLevels.map((level, index) => {
+      return {
+        level: `${this.forgeThemePrefix}-on-${this.type}-${level}`,
+        color: this.onSurfaceContainerColors[index]
+      };
+    });
+  });
+
   setColors = (newColor) => {
     let isValidColor = chroma.valid(newColor);
     if (!isValidColor) {
       return;
     }
-    const demoContainer = document.querySelector('#demo-container');
+    const demoContainer = document.querySelector('html');
     this.color = newColor;
     this.onColor = this.getAccessibleTextColor(newColor);
     this.colorLightest = chroma(newColor).tint(0.95);
 
     this.containerColors = chroma
       .scale([chroma(newColor).brighten(2), this.colorLightest])
-      .mode('hsl')
+      .mode('oklch')
       .colors(this.containerColorLevels.length);
 
     this.onContainerColors = this.containerColors.map((cc, index) =>
@@ -63,6 +94,51 @@ export class ThemeColor {
 
     demoContainer.style.setProperty(`--forge-theme-on-${this.type}`, this.onColor);
     demoContainer.style.setProperty(`--forge-theme-${this.type}`, this.color);
+
+    // Manual override for neutral theme demo:
+    const overrideColor = '#f5f5f5';
+    demoContainer.style.setProperty(`--forge-theme-on-primary`, overrideColor);
+    demoContainer.style.setProperty(`--forge-theme-on-secondary`, overrideColor);
+    demoContainer.style.setProperty(`--forge-theme-on-tertiary`, overrideColor);
+    theme.primary.onColor = overrideColor;
+    theme.secondary.onColor = overrideColor;
+    theme.tertiary.onColor = overrideColor;
+  };
+
+  setSurfaceColors = (newColor) => {
+    let isValidColor = chroma.valid(newColor);
+    if (!isValidColor) {
+      return;
+    }
+    const demoContainer = document.querySelector('#demo-container');
+    this.surfaceColor = newColor;
+    this.onSurfaceColor = this.getAccessibleTextColor(newColor);
+    this.onSurfaceColorDarkest = '#333333';
+
+    this.surfaceContainerColors = chroma
+      // .scale([this.onSurfaceColorDarkest, chroma(newColor).brighten(2)])
+      .scale(['white', 'black'])
+      .mode('oklch')
+      .colors(this.surfaceContainerColorLevels.length);
+
+    this.onSurfaceContainerColors = this.surfaceContainerColors.map((cc, index) => {
+      if (chroma(this.surfaceColor).luminance() > 0.5) {
+        return '#ffffff';
+      } else {
+        return '#000000';
+      }
+    });
+
+    this.surfaceColorLevels.forEach((level) => {
+      demoContainer.style.setProperty(`${level.level}`, level.color);
+    });
+
+    this.onSurfaceColorLevels.forEach((level) => {
+      demoContainer.style.setProperty(`${level.level}`, level.color);
+    });
+
+    demoContainer.style.setProperty(`--forge-theme-on-${this.type}`, this.onSurfaceColor);
+    demoContainer.style.setProperty(`--forge-theme-${this.type}`, this.surfaceColor);
   };
 
   getAccessibleTextColor = (containerColor, containerColorIndex) => {
@@ -153,5 +229,46 @@ export class ThemeColor {
 
   set onContainerColors(value) {
     this.#onContainerColors = value;
+  }
+
+  // SURFACE COLORS
+  get surfaceColor() {
+    return this.#surfaceColor.value;
+  }
+
+  set surfaceColor(value) {
+    this.#surfaceColor.value = value;
+  }
+
+  get onSurfaceColor() {
+    return this.#onSurfaceColor.value;
+  }
+
+  set onSurfaceColor(value) {
+    this.#onSurfaceColor.value = value;
+  }
+
+  get surfaceColorLightest() {
+    return this.#surfaceColorLightest.value;
+  }
+
+  set surfaceColorLightest(value) {
+    this.#surfaceColorLightest.value = value;
+  }
+
+  get surfaceContainerColors() {
+    return this.#surfaceContainerColors;
+  }
+
+  set surfaceContainerColors(value) {
+    this.#surfaceContainerColors = value;
+  }
+
+  get onSurfaceContainerColors() {
+    return this.#onSurfaceContainerColors;
+  }
+
+  set onSurfaceContainerColors(value) {
+    this.#onSurfaceContainerColors = value;
   }
 }

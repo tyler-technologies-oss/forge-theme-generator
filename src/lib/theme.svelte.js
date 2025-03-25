@@ -2,7 +2,7 @@ import { ThemeColor } from './themeColor.svelte';
 class Theme {
   #density = $state({ value: 'default' });
   #isDense = $state({ value: false });
-  #desiredContrastRatio = $state({ value: '5' });
+  #desiredContrastRatio = $state({ value: '7' });
 
   get density() {
     return this.#density.value;
@@ -29,18 +29,43 @@ class Theme {
   }
 
   #primary = new ThemeColor({
-    color: '#3f51b5',
+    color: '#222222',
     type: 'primary'
   });
 
   #secondary = new ThemeColor({
-    color: '#ffc107',
+    color: '#444444',
     type: 'secondary'
   });
 
   #tertiary = new ThemeColor({
-    color: '#3d5afe',
+    color: '#707070',
     type: 'tertiary'
+  });
+
+  #success = new ThemeColor({
+    color: '#2e7d32',
+    type: 'success'
+  });
+
+  #error = new ThemeColor({
+    color: '#b00020',
+    type: 'error'
+  });
+
+  #warning = new ThemeColor({
+    color: '#d14900',
+    type: 'warning'
+  });
+
+  #info = new ThemeColor({
+    color: '#6b7280',
+    type: 'info'
+  });
+
+  #surface = new ThemeColor({
+    color: '#ffffff',
+    type: 'surface'
   });
 
   get primary() {
@@ -65,6 +90,46 @@ class Theme {
 
   set tertiary(value) {
     this.#tertiary.color.value = value;
+  }
+
+  get surface() {
+    return this.#surface;
+  }
+
+  set surface(value) {
+    this.#surface.color.value = value;
+  }
+
+  get success() {
+    return this.#success;
+  }
+
+  set success(value) {
+    this.#success.color.value = value;
+  }
+
+  get error() {
+    return this.#error;
+  }
+
+  set error(value) {
+    this.#error.color.value = value;
+  }
+
+  get warning() {
+    return this.#warning;
+  }
+
+  set warning(value) {
+    this.#warning.color.value = value;
+  }
+
+  get info() {
+    return this.#info;
+  }
+
+  set info(value) {
+    this.#info.color.value = value;
   }
 }
 

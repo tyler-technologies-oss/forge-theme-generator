@@ -5,24 +5,18 @@
   let tabBar;
   let currentUrl = $state({ value: '' });
 
+  let pages = [
+    { url: '/', title: 'Home' },
+    { url: '/palette/', title: 'Color Palette' }
+  ];
+
   $effect(() => {
     currentUrl.value = window.location.pathname;
-    if (currentUrl.value.includes('palette')) {
-      tabBar.activeTab = 1;
-    } else {
-      tabBar.activeTab = 0;
-    }
+    tabBar.activeTab = pages.findIndex((page) => page.url.includes(currentUrl.value));
   });
 
   const onTabBarChange = (e) => {
-    switch (e.index) {
-      case 0:
-        goto('/');
-        break;
-      case 1:
-        goto('/palette');
-        break;
-    }
+    goto(pages[e].url);
   };
 </script>
 
@@ -30,9 +24,10 @@
   bind:this={tabBar}
   data-aria-label="Demo tabs"
   onforge-tab-bar-change={(e) => {
-    onTabBarChange(e.detail);
+    onTabBarChange(e.detail.index);
   }}
 >
-  <forge-tab value="/">Demo App Preview</forge-tab>
-  <forge-tab value="/palette">Palette</forge-tab>
+  {#each pages as page}
+    <forge-tab value={page.url}>{page.title}</forge-tab>
+  {/each}
 </forge-tab-bar>

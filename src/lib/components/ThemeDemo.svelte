@@ -16,6 +16,7 @@
           <forge-app-bar title-text="Tyler Forge">
             <forge-icon slot="logo" name="forge_logo" external external-type="custom"></forge-icon>
           </forge-app-bar>
+          <forge-banner theme="info">This is a forge-banner using the info theme.</forge-banner>
         </div>
         <forge-drawer slot="body-left">
           <aside>
@@ -41,14 +42,7 @@
         </forge-drawer>
         <div slot="body">
           <forge-toolbar>
-            <forge-stack slot="start" inline alignment="center">
-              <h2 class="forge-typography--heading3">Theme demo</h2>
-              <forge-chip-set type="filter">
-                <forge-chip value="payments">Payments</forge-chip>
-                <forge-chip value="bills">Bills</forge-chip>
-                <forge-chip value="adjustments">Adjustments</forge-chip>
-              </forge-chip-set>
-            </forge-stack>
+            <h2 class="forge-typography--heading3" slot="start">Toolbar title</h2>
             <div slot="end">
               <ForgeMenuDemo />
             </div>
@@ -61,10 +55,10 @@
               <RequestCard />
             </div>
 
-            <div class="span-full">
+            <!-- <div class="span-full">
               <forge-slider range data-aria-label-start="Start" data-aria-label-end="End"
               ></forge-slider>
-            </div>
+            </div> -->
           </div>
           <forge-stack inline justify="end">
             <forge-fab style="margin: 24px;">
