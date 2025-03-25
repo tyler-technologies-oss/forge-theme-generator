@@ -31,7 +31,7 @@
         onColorChange(e.target.value);
       }}
     />
-
+    <div slot="end" class="color-preview-box" style:background-color={theme[colorType].color}></div>
     <forge-icon-button aria-label="Open color picker" slot="end" id={`${colorType}-color-selector`}>
       <forge-icon name="format_color_fill" external></forge-icon>
     </forge-icon-button>
@@ -52,5 +52,15 @@
 <style>
   label {
     text-transform: capitalize;
+  }
+
+  .color-preview-box {
+    border-radius: 4px;
+    height: 16px;
+    width: 16px;
+  }
+
+  forge-text-field::part(end) {
+    padding-inline-end: 0;
   }
 </style>
