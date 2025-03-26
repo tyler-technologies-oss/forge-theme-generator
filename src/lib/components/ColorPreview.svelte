@@ -49,7 +49,7 @@
     position: relative;
     height: 64px;
     width: 64px;
-    border-radius: var(--forge-shape-factor);
+    border-radius: calc(var(--forge-shape-medium, 4px) * var(--forge-shape-factor, 1));
   }
 
   .fo {
